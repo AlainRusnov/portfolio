@@ -40,12 +40,12 @@ function init() {
   // }
 
   let materialArray = [];
-  let texture_ft = new THREE.TextureLoader().load('/img/left.png');
-  let texture_bk = new THREE.TextureLoader().load('/img/back.png');
-  let texture_up = new THREE.TextureLoader().load('/img/up.jpg');
-  let texture_dn = new THREE.TextureLoader().load('/img/down.png');
-  let texture_rt = new THREE.TextureLoader().load('/img/right.png');
-  let texture_lf = new THREE.TextureLoader().load('/img/front.png');
+  let texture_ft = new THREE.TextureLoader().load('./img/left.png');
+  let texture_bk = new THREE.TextureLoader().load('./img/back.png');
+  let texture_up = new THREE.TextureLoader().load('./img/up.jpg');
+  let texture_dn = new THREE.TextureLoader().load('./img/down.png');
+  let texture_rt = new THREE.TextureLoader().load('./img/right.png');
+  let texture_lf = new THREE.TextureLoader().load('./img/front.png');
 
   materialArray.push(new THREE.MeshBasicMaterial({ map: texture_ft }));
   materialArray.push(new THREE.MeshBasicMaterial({ map: texture_bk }));
