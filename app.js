@@ -18,28 +18,43 @@
 let scene, camera, renderer;
 
 function init() {
+  // const container = document.createElement( 'div' );
+	// document.body.appendChild( container );
+
+
   scene = new THREE.Scene();
-  camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 45, 30000);
-  camera.position.set(-900, -100, 900);
+  camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 60, 200000);
+  camera.position.set(-900, -100, 5000);
+
 
   renderer = new THREE.WebGLRenderer({ antialias: true });
   renderer.setSize(window.innerWidth * 1, window.innerHeight * 1);
-  renderer.setClearColor(0x888888, 1)
+  // renderer.setClearColor(0x00ffff, 1);
   document.body.appendChild(renderer.domElement);
 
   // Camera/Mouse controls - Issues on file restructure for three.js error nil[i]
   let controls = new THREE.OrbitControls(camera, renderer.domElement);
   controls.addEventListener('change', renderer.domElement);
-  controls.minDistance = 500;
-  controls.maxDistance = 1500;
+  // controls.minDistance = 500;
+  // controls.maxDistance = 1500;
   // controls.keys = {
-  //   LEFT: 37, //left arrow
-  //   UP: 38, // up arrow
-  //   RIGHT: 39, // right arrow
-  //   BOTTOM: 40 // down arrow
-  // }
+    //   LEFT: 37, //left arrow
+    //   UP: 38, // up arrow
+    //   RIGHT: 39, // right arrow
+    //   BOTTOM: 40 // down arrow
+    // }
 
-  let materialArray = [];
+    // const geometry = new THREE.BoxGeometry(100000, 100000, 100000);
+    // let textureContainer = new THREE.TextureLoader().load('./img/gumball.jpg');
+
+    // const materialContainer = new THREE.MeshBasicMaterial( { map: textureContainer } );
+    // // materialContainer.side = THREE.Backside;
+    // const container = new THREE.Mesh(geometry, materialContainer);
+    // scene.add(container);
+
+
+    // Cube 1 texture map
+  let materialArray1 = [];
   let texture_ft = new THREE.TextureLoader().load('./img/left.png');
   let texture_bk = new THREE.TextureLoader().load('./img/back.png');
   let texture_up = new THREE.TextureLoader().load('./img/up.jpg');
@@ -47,18 +62,44 @@ function init() {
   let texture_rt = new THREE.TextureLoader().load('./img/right.png');
   let texture_lf = new THREE.TextureLoader().load('./img/front.png');
 
-  materialArray.push(new THREE.MeshBasicMaterial({ map: texture_ft }));
-  materialArray.push(new THREE.MeshBasicMaterial({ map: texture_bk }));
-  materialArray.push(new THREE.MeshBasicMaterial({ map: texture_up }));
-  materialArray.push(new THREE.MeshBasicMaterial({ map: texture_dn }));
-  materialArray.push(new THREE.MeshBasicMaterial({ map: texture_rt }));
-  materialArray.push(new THREE.MeshBasicMaterial({ map: texture_lf }));
+  materialArray1.push(new THREE.MeshBasicMaterial({ map: texture_ft }));
+  materialArray1.push(new THREE.MeshBasicMaterial({ map: texture_bk }));
+  materialArray1.push(new THREE.MeshBasicMaterial({ map: texture_up }));
+  materialArray1.push(new THREE.MeshBasicMaterial({ map: texture_dn }));
+  materialArray1.push(new THREE.MeshBasicMaterial({ opacity: 0, transparent: true, map: texture_rt }));
+  materialArray1.push(new THREE.MeshBasicMaterial({ map: texture_lf }));
+
 
   for (let i = 0; i < 6; i++)
-    materialArray[i].side = THREE.BackSide;
-  let skyboxGeo = new THREE.BoxGeometry(35000, 25000, 30000);
-  let skybox = new THREE.Mesh(skyboxGeo, materialArray);
-  scene.add(skybox);
+  materialArray1[i].side = THREE.BackSide;
+
+
+  // Cube 2 texture map
+  let materialArray2 = [];
+  let texture_ft2 = new THREE.TextureLoader().load('./img/right.png');
+  let texture_bk2 = new THREE.TextureLoader().load('./img/right.png');
+  let texture_up2 = new THREE.TextureLoader().load('./img/up.jpg');
+  let texture_dn2= new THREE.TextureLoader().load('./img/down.png');
+  let texture_rt2 = new THREE.TextureLoader().load('./img/Gumwall.png');
+  let texture_lf2 = new THREE.TextureLoader().load('./img/right.png');
+
+  materialArray2.push(new THREE.MeshBasicMaterial({ map: texture_ft2 }));
+  materialArray2.push(new THREE.MeshBasicMaterial({ map: texture_bk2 }));
+  materialArray2.push(new THREE.MeshBasicMaterial({ map: texture_up2 }));
+  materialArray2.push(new THREE.MeshBasicMaterial({ map: texture_dn2 }));
+  materialArray2.push(new THREE.MeshBasicMaterial({ map: texture_rt2 }));
+  materialArray2.push(new THREE.MeshBasicMaterial({ opacity: 0, transparent: true, map: texture_lf2 }));
+
+  for (let i = 0; i < 6; i++)
+  materialArray2[i].side = THREE.BackSide;
+
+  let cubeGeo = new THREE.BoxGeometry(35000, 25000, 30000);
+  let cube1 = new THREE.Mesh(cubeGeo, materialArray1);
+  let cube2 = new THREE.Mesh(cubeGeo, materialArray2);
+  cube1.position.set(-5000, -100, -8000);
+  cube2.position.set(-5000, -100, 22000);
+  scene.add(cube1);
+  scene.add(cube2);
   animate();
 }
 
