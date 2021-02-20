@@ -1,3 +1,9 @@
+// V 0.5 // Expanded structure - Placholder layout - fixed texture clipping
+
+![ARpfphLayout](https://user-images.githubusercontent.com/71734708/108610832-c150de80-73a6-11eb-9c4b-e74c741fed4d.png)
+
+
+
 // V 0.4 // -- https://alainrusnov.github.io/portfolio/
 
 ![3DARPoCPF](https://user-images.githubusercontent.com/71734708/108457349-7fa62380-7240-11eb-8645-28ce0d7fc70b.gif)
