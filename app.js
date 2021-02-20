@@ -18,7 +18,7 @@
 let scene, camera, renderer;
 
 function init() {
-  // const container = document.createElement( 'div' );
+  // const canvas = document.querySelector('#c');
 	// document.body.appendChild( container );
 
 
@@ -56,17 +56,17 @@ function init() {
     // Cube 1 texture map
   let materialArray1 = [];
   let texture_ft = new THREE.TextureLoader().load('./img/left.png');
-  let texture_bk = new THREE.TextureLoader().load('./img/back.png');
+  let texture_bk = new THREE.TextureLoader().load('./img/left.png');
   let texture_up = new THREE.TextureLoader().load('./img/up.jpg');
   let texture_dn = new THREE.TextureLoader().load('./img/down.png');
   let texture_rt = new THREE.TextureLoader().load('./img/right.png');
-  let texture_lf = new THREE.TextureLoader().load('./img/front.png');
+  let texture_lf = new THREE.TextureLoader().load('./img/Hero.png');
 
-  materialArray1.push(new THREE.MeshBasicMaterial({ map: texture_ft }));
+  materialArray1.push(new THREE.MeshBasicMaterial({ opacity: 0, transparent: true, map: texture_ft }));
   materialArray1.push(new THREE.MeshBasicMaterial({ map: texture_bk }));
   materialArray1.push(new THREE.MeshBasicMaterial({ map: texture_up }));
   materialArray1.push(new THREE.MeshBasicMaterial({ map: texture_dn }));
-  materialArray1.push(new THREE.MeshBasicMaterial({ opacity: 0, transparent: true, map: texture_rt }));
+  materialArray1.push(new THREE.MeshBasicMaterial({ opacity: 0, transparent: true }));
   materialArray1.push(new THREE.MeshBasicMaterial({ map: texture_lf }));
 
 
@@ -80,26 +80,71 @@ function init() {
   let texture_bk2 = new THREE.TextureLoader().load('./img/right.png');
   let texture_up2 = new THREE.TextureLoader().load('./img/up.jpg');
   let texture_dn2= new THREE.TextureLoader().load('./img/down.png');
-  let texture_rt2 = new THREE.TextureLoader().load('./img/Gumwall.png');
+  let texture_rt2 = new THREE.TextureLoader().load('./img/left.png');
   let texture_lf2 = new THREE.TextureLoader().load('./img/right.png');
 
-  materialArray2.push(new THREE.MeshBasicMaterial({ map: texture_ft2 }));
+  materialArray2.push(new THREE.MeshBasicMaterial({ opacity: 0, transparent: true, map: texture_ft2 }));
   materialArray2.push(new THREE.MeshBasicMaterial({ map: texture_bk2 }));
   materialArray2.push(new THREE.MeshBasicMaterial({ map: texture_up2 }));
   materialArray2.push(new THREE.MeshBasicMaterial({ map: texture_dn2 }));
   materialArray2.push(new THREE.MeshBasicMaterial({ map: texture_rt2 }));
-  materialArray2.push(new THREE.MeshBasicMaterial({ opacity: 0, transparent: true, map: texture_lf2 }));
+  materialArray2.push(new THREE.MeshBasicMaterial({ opacity: 0, transparent: true }));
 
   for (let i = 0; i < 6; i++)
   materialArray2[i].side = THREE.BackSide;
 
+  // // Cube 3 texture map
+  let materialArray3 = [];
+  let texture_ft3 = new THREE.TextureLoader().load('./img/pfpro.png');
+  let texture_bk3 = new THREE.TextureLoader().load('./img/right.png');
+  let texture_up3 = new THREE.TextureLoader().load('./img/up.jpg');
+  let texture_dn3= new THREE.TextureLoader().load('./img/down.png');
+  let texture_rt3 = new THREE.TextureLoader().load('./img/gbbank.png');
+  let texture_lf3 = new THREE.TextureLoader().load('./img/right.png');
+
+  materialArray3.push(new THREE.MeshBasicMaterial({ map: texture_ft3 }));
+  materialArray3.push(new THREE.MeshBasicMaterial({ opacity: 0, transparent: true, map: texture_bk3 }));
+  materialArray3.push(new THREE.MeshBasicMaterial({ map: texture_up3 }));
+  materialArray3.push(new THREE.MeshBasicMaterial({ map: texture_dn3 }));
+  materialArray3.push(new THREE.MeshBasicMaterial({ map: texture_rt3 }));
+  materialArray3.push(new THREE.MeshBasicMaterial({ opacity: 0, transparent: true, map: texture_lf3 }));
+
+  for (let i = 0; i < 6; i++)
+  materialArray3[i].side = THREE.BackSide;
+
+  // // Cube 4 texture map
+  let materialArray4 = [];
+  let texture_ft4 = new THREE.TextureLoader().load('./img/gblogo.png');
+  let texture_bk4 = new THREE.TextureLoader().load('./img/right.png');
+  let texture_up4 = new THREE.TextureLoader().load('./img/up.jpg');
+  let texture_dn4= new THREE.TextureLoader().load('./img/down.png');
+  let texture_rt4 = new THREE.TextureLoader().load('./img/Gumwall.png');
+  let texture_lf4 = new THREE.TextureLoader().load('./img/left.png');
+
+  materialArray4.push(new THREE.MeshBasicMaterial({ map: texture_ft4 }));
+  materialArray4.push(new THREE.MeshBasicMaterial({ opacity: 0, transparent: true, map: texture_bk4 }));
+  materialArray4.push(new THREE.MeshBasicMaterial({ map: texture_up4 }));
+  materialArray4.push(new THREE.MeshBasicMaterial({ map: texture_dn4 }));
+  materialArray4.push(new THREE.MeshBasicMaterial({ opacity: 0, transparent: true }));
+  materialArray4.push(new THREE.MeshBasicMaterial({ map: texture_lf4 }));
+
+  for (let i = 0; i < 6; i++)
+  materialArray4[i].side = THREE.BackSide;
+
   let cubeGeo = new THREE.BoxGeometry(35000, 25000, 30000);
   let cube1 = new THREE.Mesh(cubeGeo, materialArray1);
   let cube2 = new THREE.Mesh(cubeGeo, materialArray2);
+  let cube3 = new THREE.Mesh(cubeGeo, materialArray3);
+  let cube4 = new THREE.Mesh(cubeGeo, materialArray4);
   cube1.position.set(-5000, -100, -8000);
   cube2.position.set(-5000, -100, 22000);
+  cube3.position.set(30000, -100, 22000);
+  cube4.position.set(30000, -100, -8000);
+  // scene.add(canvas);
   scene.add(cube1);
   scene.add(cube2);
+  scene.add(cube3);
+  scene.add(cube4);
   animate();
 }
 
