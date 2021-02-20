@@ -23,8 +23,8 @@ function init() {
 
 
   scene = new THREE.Scene();
-  camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 60, 200000);
-  camera.position.set(-900, -100, 5000);
+  camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 60, 200000);
+  camera.position.set(10000, -100, 12000);
 
 
   renderer = new THREE.WebGLRenderer({ antialias: true });
@@ -35,8 +35,8 @@ function init() {
   // Camera/Mouse controls - Issues on file restructure for three.js error nil[i]
   let controls = new THREE.OrbitControls(camera, renderer.domElement);
   controls.addEventListener('change', renderer.domElement);
-  // controls.minDistance = 500;
-  // controls.maxDistance = 1500;
+  // controls.minDistance = 3000;
+  // controls.maxDistance = 3000;
   // controls.keys = {
     //   LEFT: 37, //left arrow
     //   UP: 38, // up arrow
