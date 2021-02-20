@@ -80,7 +80,7 @@ function init() {
   let texture_bk2 = new THREE.TextureLoader().load('./img/right.png');
   let texture_up2 = new THREE.TextureLoader().load('./img/up.jpg');
   let texture_dn2= new THREE.TextureLoader().load('./img/down.png');
-  let texture_rt2 = new THREE.TextureLoader().load('./img/left.png');
+  let texture_rt2 = new THREE.TextureLoader().load('./img/dawg.png');
   let texture_lf2 = new THREE.TextureLoader().load('./img/right.png');
 
   materialArray2.push(new THREE.MeshBasicMaterial({ opacity: 0, transparent: true, map: texture_ft2 }));
@@ -119,7 +119,7 @@ function init() {
   let texture_up4 = new THREE.TextureLoader().load('./img/up.jpg');
   let texture_dn4= new THREE.TextureLoader().load('./img/down.png');
   let texture_rt4 = new THREE.TextureLoader().load('./img/Gumwall.png');
-  let texture_lf4 = new THREE.TextureLoader().load('./img/left.png');
+  let texture_lf4 = new THREE.TextureLoader().load('./img/stuud.png');
 
   materialArray4.push(new THREE.MeshBasicMaterial({ map: texture_ft4 }));
   materialArray4.push(new THREE.MeshBasicMaterial({ opacity: 0, transparent: true, map: texture_bk4 }));
