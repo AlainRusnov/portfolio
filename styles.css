@@ -3,8 +3,43 @@ body {
   height: 100vh;
   margin: 0;
   overflow: hidden;
+	background-color: #000;
+	color: #fff;
+	font-family: Roboto;
+	font-size: 13px;
+	line-height: 24px;
+	overscroll-behavior: none;
 }
 
 /* #c {
   background: url("./img/sky.jpg");
 } */
+
+#info {
+	position: absolute;
+	/* top: 0px; */
+  bottom: 0px;
+	width: 100%;
+	padding: 30px;
+	box-sizing: border-box;
+	text-align: left;
+	-moz-user-select: none;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	pointer-events: none;
+	/* z-index: 1; TODO Solve this in HTML */
+}
+
+a {
+	color: rgb(68, 68, 67);
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a {
+	pointer-events: auto;
+}
