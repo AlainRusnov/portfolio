@@ -124,24 +124,24 @@ function init() {
             tooltip.style.left = event.clientX + 20 + 'px';
             window.addEventListener( 'click', onClick );
             function onClick() {
-              if ( tooltip.style.visibility === 'visible')
-              projectInfo.style.visibility = 'visible';
-              // overlay.classList.remove('hidden');
-            }
-            document.addEventListener('keydown', function (e) {
+              tooltip.style.visibility === 'visible' ? projectInfo.style.visibility = 'visible': projectInfo.style.visibility = 'hidden';
+            };
+            // overlay.classList.remove('hidden');
+
+              document.addEventListener('keydown', function (e) {
               if (e.key === 'Escape') {
                 closeModal();
               }
               // btnCloseModal.addEventListener('click', closeModal);
               // overlay.addEventListener('click', closeModal);
-            });
+              });
           } else {
             // console.log(arr.map.image.src)
             // console.log(false);
             // tooltip.innerHTML = arr.map.image.src;
             tooltip.style.visibility = 'hidden';
             // projectInfo.style.visibility = 'hidden';
-        }
+          }
         // overlay.addEventListener('click', closeModal);
         // controls.update();
       };
