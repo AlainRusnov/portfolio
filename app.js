@@ -35,9 +35,9 @@ function init() {
   // Camera/Mouse controls - Issues on file restructure for three.js error nil[i]
   let controls = new THREE.OrbitControls(camera, renderer.domElement);
   controls.addEventListener('change', renderer.domElement);
-				controls.listenToKeyEvents( window ); // optional
+				controls.listenToKeyEvents( window ); // keys...
 
-				controls.enableDamping = true; // an animation loop is required when either damping or auto-rotation are enabled
+				controls.enableDamping = true; // ( use later ) // an animation loop is required when either damping or auto-rotation are enabled
 				controls.dampingFactor = 0.5;
 
 				controls.screenSpacePanning = false;
@@ -45,11 +45,20 @@ function init() {
 				controls.maxPolarAngle = Math.PI / 2;
   // controls.minDistance = 3000;
   // controls.maxDistance = 3000;
-  controls.keys = {
+    controls.keys = {
       LEFT: 37, //left arrow
       UP: 38, // up arrow
       RIGHT: 39, // right arrow
       BOTTOM: 40 // down arrow
+    }
+    controls.keyPanSpeed = 75; // Keyboard move speed ( janky )
+    controls.panSpeed = 15;
+
+    // Reassign controls ( review for mobile )
+    controls.mouseButtons = {
+      LEFT: THREE.MOUSE.ROTATE,
+      MIDDLE: THREE.MOUSE.DOLLY,
+      RIGHT: THREE.MOUSE.PAN,
     }
 
     // const geometry = new THREE.BoxGeometry(100000, 100000, 100000);
