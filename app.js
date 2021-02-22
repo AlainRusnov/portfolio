@@ -18,24 +18,26 @@
 let scene, camera, renderer;
 
 function init() {
-  // const canvas = document.querySelector('#c');
+  // const canvas = document.querySelector('#c'); // Skybox and outdoor scene // Later
 	// document.body.appendChild( container );
 
 
+  ///////////// Scene + Cam /////////////////////////
   scene = new THREE.Scene();
   camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 60, 200000);
   camera.position.set(10000, -100, 12000);
 
-
+  /////////// WebGL /////////////////////
   renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
   renderer.setSize(window.innerWidth * 1, window.innerHeight * 1);
   renderer.setClearColor(0x0000FF, 0.1);
   document.body.appendChild(renderer.domElement);
 
-  // Camera/Mouse controls - Issues on file restructure for three.js error nil[i]
+  ////////////// Camera/Mouse controls - ///////////////// Issues on file restructure for three.js error nil[i]
+
   let controls = new THREE.OrbitControls(camera, renderer.domElement);
   controls.addEventListener('change', renderer.domElement);
-				// controls.listenToKeyEvents( window ); // keys...
+				controls.listenToKeyEvents( window ); // keys...
 
 				controls.enableDamping = true; // ( use later ) // an animation loop is required when either damping or auto-rotation are enabled
 				controls.dampingFactor = 0.5;
@@ -51,7 +53,8 @@ function init() {
       RIGHT: 39, // right arrow
       BOTTOM: 40 // down arrow
     }
-    controls.keyPanSpeed = 75; // Keyboard move speed ( janky )
+
+    controls.keyPanSpeed = 60; // Keyboard move speed ( janky )
     controls.panSpeed = 15;
 
     // Reassign controls ( review for mobile )
@@ -60,6 +63,8 @@ function init() {
       MIDDLE: THREE.MOUSE.DOLLY,
       RIGHT: THREE.MOUSE.PAN,
     }
+
+  ///////// Lighting ////////////////
 
     const ambientLight = new THREE.AmbientLight( 0xcccccc );
 				scene.add( ambientLight );
@@ -75,21 +80,46 @@ function init() {
     // // materialContainer.side = THREE.Backside;
     // const container = new THREE.Mesh(geometry, materialContainer);
     // scene.add(container);
-    // Wireframe Intersect Objects
+
+
+  //////////// Wireframe Intersect Objects /////////////////////////////////////////////////
+
   let projectGeo = new THREE.BoxGeometry(25000, 15000, 50);
-  let projectMaterial = new THREE.MeshPhongMaterial({ opacity: 0, color: 0xff, transparent: true}); // wireframe: true
+  let projectMaterial = new THREE.MeshPhongMaterial({ opacity: 0, color: 0xff, wireframe: true }); // wireframe: true transparent: true
+
   let stuud = new THREE.Mesh(projectGeo, projectMaterial);
   stuud.name = "stuud";
 
-  stuud.position.set(30000, -2000, -22900); // -23000 is flush with wall bounds
+  let gumballBank = new THREE.Mesh(projectGeo, projectMaterial);
+  gumballBank.name = "gumballbank";
+
+  let gumballViewer = new THREE.Mesh(projectGeo, projectMaterial);
+  gumballViewer.name = "gumballviewer";
+
+  let dawg = new THREE.Mesh(projectGeo, projectMaterial);
+  dawg.name = "dawg";
+
+  /////////// Wireframe Intersect Objects Positions /////////////////////////////////////////
+
+  stuud.position.set(30000, -2000, -22900); // z:-23000 is flush with wall bounds
   scene.add(stuud);
 
-    // Raycasting // View coords
+  gumballBank.position.set(33000, 2000, 37000); // z:-37000 is flush with wall bounds
+  scene.add(gumballBank);
+
+  gumballViewer.position.set(47500, 1000, -4000); // x:48000 is flush with wall bounds
+  gumballViewer.rotation.set(0, Math.PI /2,0);
+  scene.add(gumballViewer);
+
+  dawg.position.set(-5000, 2000, 37000); // z:-37000 is flush with wall bounds
+  scene.add(dawg);
+
+  ////////// Raycasting // Intersect Object Logic Gate with tooltip and Modal  ////////////////////////////////
+
     const mouse = new THREE.Vector2();
 
     window.addEventListener( 'mousemove', onMouseMove );
     const  raycaster = new THREE.Raycaster();
-    // const projectInfo = document.getElementById("modal");
 
 
     function onMouseMove( event ) {
@@ -102,23 +132,21 @@ function init() {
       const intersects = raycaster.intersectObjects( scene.children );
       const tooltip = document.getElementById("tooltip");
       const projectInfo = document.getElementById("modal");
-      // const overlay = document.querySelector('.overlay');
-      // const btnCloseModal = document.querySelector('.btn--close-project--modal');
+
       const closeModal = function () {
         projectInfo.style.visibility = 'hidden';
-        // overlay.classList.add('hidden');
       };
 
       if (intersects[0]) {
-        // const btnCloseModal = document.querySelector('.btn--close-project--modal');
-        // console.log(btnCloseModal);
-        let coords = intersects[0].object.name;
-        // console.log(coords);
-        // coords.forEach((arr) => {
-          if (coords === "stuud") {
+
+        let coords = intersects[0].object.name; // Naming convention allows for wireframe detection + data call
+        console.log(coords);
+
+          if (coords.match(/^[a-z]+$/)) {//"stuud" || "gumball-viewer" || "gumball-bank" || "dawg" ) {
           // ? console.log(true): console.log(false));
             // console.log(true);
             tooltip.innerHTML = coords;
+            let name = coords;
             tooltip.style.visibility = 'visible';
             tooltip.style.top = event.clientY + 'px';
             tooltip.style.left = event.clientX + 20 + 'px';
@@ -126,24 +154,15 @@ function init() {
             function onClick() {
               tooltip.style.visibility === 'visible' ? projectInfo.style.visibility = 'visible': projectInfo.style.visibility = 'hidden';
             };
-            // overlay.classList.remove('hidden');
 
               document.addEventListener('keydown', function (e) {
-              if (e.key === 'Escape') {
-                closeModal();
-              }
-              // btnCloseModal.addEventListener('click', closeModal);
-              // overlay.addEventListener('click', closeModal);
-              });
-          } else {
-            // console.log(arr.map.image.src)
-            // console.log(false);
-            // tooltip.innerHTML = arr.map.image.src;
+                if (e.key === 'Escape') {
+                  closeModal();
+                  }
+                });
+            } else {
             tooltip.style.visibility = 'hidden';
-            // projectInfo.style.visibility = 'hidden';
-          }
-        // overlay.addEventListener('click', closeModal);
-        // controls.update();
+            }
       };
     };
 
@@ -204,6 +223,31 @@ function init() {
     // }
 
 
+///////////// MODULAR BUILD ///////////////
+//// Schema Top view ////
+
+               //Front
+
+            //////////////
+            //          //
+    //Left  //          // //Right
+            //          //
+            //////////////
+
+               //Back
+
+
+    ///////////////////////////
+    //          //           //
+    //    4     //      3    //
+    //          //           //
+    ///////////////////////////
+    //          //           //
+    //    1     //      2    //
+    //          //           //
+    ///////////////////////////
+
+  //^^ Windows + Doors this side ^^//
 
 
 

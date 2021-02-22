@@ -63,12 +63,12 @@ a {
 #modal {
 	position: absolute;
 	color: whitesmoke;
-	background-color:  rgb(68, 68, 67);
+	/* background-color:  rgb(68, 68, 67); */
 	top: 20px;
 	right: 20px;
   /* bottom: 0px; */
-	width: 20%;
-	border: 1px black;
+	width: 30%;
+	border: 4px whitesmoke;
 	padding: 10px;
 	box-sizing: border-box;
 	text-align: left;
@@ -78,6 +78,11 @@ a {
 	user-select: auto;
 	pointer-events: none;
 	/* z-index: ; */
+	background: rgba(5, 5, 5, 0.1);
+  box-shadow: 0 8px 32px 0 rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur( 20.0px );
+  -webkit-backdrop-filter: blur( 20.0px );
+  border-radius: 4px;
 }
 
 .overlay {
@@ -97,8 +102,8 @@ a {
   color: inherit;
   position: absolute;
   top: 0.5rem;
-  right: 2rem;
-  font-size: 4rem;
+  right: 1rem;
+  font-size: 2rem;
   cursor: pointer;
   border: none;
   background: none;
@@ -108,4 +113,16 @@ a {
 .hidden {
   visibility: hidden;
   opacity: 0;
+}
+
+h1 {
+	font-family: 'Roboto';
+	font-size: 3rem;
+	text-align: center;
+}
+
+p {
+	/* font-family: 'Roboto'; */
+	font-size: 1.10rem;
+	color: rgb(61, 60, 63);
 }
