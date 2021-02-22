@@ -28,7 +28,6 @@ body {
 	-ms-user-select: none;
 	user-select: none;
 	pointer-events: none;
-	/* z-index: 1; TODO Solve this in HTML */
 }
 
 a {
@@ -42,4 +41,71 @@ a:hover {
 
 a {
 	pointer-events: auto;
+}
+
+#tooltip {
+	position: absolute;
+	color: rgb(68, 68, 67);
+	background-color: #fff;
+	top: 0px;
+  /* bottom: 0px; */
+	/* width: 10%; */
+	padding: 10px;
+	box-sizing: border-box;
+	text-align: left;
+	-moz-user-select: none;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	pointer-events: none;
+}
+
+#modal {
+	position: absolute;
+	color: whitesmoke;
+	background-color:  rgb(68, 68, 67);
+	top: 20px;
+	right: 20px;
+  /* bottom: 0px; */
+	width: 20%;
+	border: 1px black;
+	padding: 10px;
+	box-sizing: border-box;
+	text-align: left;
+	-moz-user-select: none;
+	-webkit-user-select: none;
+	/* -ms-user-select: none; */
+	user-select: auto;
+	pointer-events: none;
+	/* z-index: ; */
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px); */
+  /* z-index: 100; */
+  transition: all 0.5s;
+}
+
+#btn {
+  font-family: inherit;
+  color: inherit;
+  position: absolute;
+  top: 0.5rem;
+  right: 2rem;
+  font-size: 4rem;
+  cursor: pointer;
+  border: none;
+  background: none;
+	/* z-index: 100; */
+}
+
+.hidden {
+  visibility: hidden;
+  opacity: 0;
 }

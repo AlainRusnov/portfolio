@@ -27,7 +27,7 @@ function init() {
   camera.position.set(10000, -100, 12000);
 
 
-  renderer = new THREE.WebGLRenderer({ antialias: true });
+  renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
   renderer.setSize(window.innerWidth * 1, window.innerHeight * 1);
   renderer.setClearColor(0x0000FF, 0.1);
   document.body.appendChild(renderer.domElement);
@@ -35,7 +35,7 @@ function init() {
   // Camera/Mouse controls - Issues on file restructure for three.js error nil[i]
   let controls = new THREE.OrbitControls(camera, renderer.domElement);
   controls.addEventListener('change', renderer.domElement);
-				controls.listenToKeyEvents( window ); // keys...
+				// controls.listenToKeyEvents( window ); // keys...
 
 				controls.enableDamping = true; // ( use later ) // an animation loop is required when either damping or auto-rotation are enabled
 				controls.dampingFactor = 0.5;
@@ -61,6 +61,13 @@ function init() {
       RIGHT: THREE.MOUSE.PAN,
     }
 
+    const ambientLight = new THREE.AmbientLight( 0xcccccc );
+				scene.add( ambientLight );
+
+    // const directionalLight = new THREE.DirectionalLight( 0xffffff, 0.2 );
+    // directionalLight.position.set( 9000, 100, 9000 ).normalize();
+    // scene.add( directionalLight );
+
     // const geometry = new THREE.BoxGeometry(100000, 100000, 100000);
     // let textureContainer = new THREE.TextureLoader().load('./img/gumball.jpg');
 
@@ -68,6 +75,136 @@ function init() {
     // // materialContainer.side = THREE.Backside;
     // const container = new THREE.Mesh(geometry, materialContainer);
     // scene.add(container);
+    // Wireframe Intersect Objects
+  let projectGeo = new THREE.BoxGeometry(25000, 15000, 50);
+  let projectMaterial = new THREE.MeshPhongMaterial({ opacity: 0, color: 0xff, transparent: true}); // wireframe: true
+  let stuud = new THREE.Mesh(projectGeo, projectMaterial);
+  stuud.name = "stuud";
+
+  stuud.position.set(30000, -2000, -22900); // -23000 is flush with wall bounds
+  scene.add(stuud);
+
+    // Raycasting // View coords
+    const mouse = new THREE.Vector2();
+
+    window.addEventListener( 'mousemove', onMouseMove );
+    const  raycaster = new THREE.Raycaster();
+    // const projectInfo = document.getElementById("modal");
+
+
+    function onMouseMove( event ) {
+
+      mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
+      mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
+
+      raycaster.setFromCamera( mouse, camera );
+
+      const intersects = raycaster.intersectObjects( scene.children );
+      const tooltip = document.getElementById("tooltip");
+      const projectInfo = document.getElementById("modal");
+      // const overlay = document.querySelector('.overlay');
+      // const btnCloseModal = document.querySelector('.btn--close-project--modal');
+      const closeModal = function () {
+        projectInfo.style.visibility = 'hidden';
+        // overlay.classList.add('hidden');
+      };
+
+      if (intersects[0]) {
+        // const btnCloseModal = document.querySelector('.btn--close-project--modal');
+        // console.log(btnCloseModal);
+        let coords = intersects[0].object.name;
+        // console.log(coords);
+        // coords.forEach((arr) => {
+          if (coords === "stuud") {
+          // ? console.log(true): console.log(false));
+            // console.log(true);
+            tooltip.innerHTML = coords;
+            tooltip.style.visibility = 'visible';
+            tooltip.style.top = event.clientY + 'px';
+            tooltip.style.left = event.clientX + 20 + 'px';
+            window.addEventListener( 'click', onClick );
+            function onClick() {
+              if ( tooltip.style.visibility === 'visible')
+              projectInfo.style.visibility = 'visible';
+              // overlay.classList.remove('hidden');
+            }
+            document.addEventListener('keydown', function (e) {
+              if (e.key === 'Escape') {
+                closeModal();
+              }
+              // btnCloseModal.addEventListener('click', closeModal);
+              // overlay.addEventListener('click', closeModal);
+            });
+          } else {
+            // console.log(arr.map.image.src)
+            // console.log(false);
+            // tooltip.innerHTML = arr.map.image.src;
+            tooltip.style.visibility = 'hidden';
+            // projectInfo.style.visibility = 'hidden';
+        }
+        // overlay.addEventListener('click', closeModal);
+        // controls.update();
+      };
+    };
+
+
+
+    // const btnCloseModal = document.getElementById('btn--close--modal');
+    // console.log(btnCloseModal);
+    // const closeModal = function () {
+    //     projectInfo.style.visibility = 'hidden';
+    //     // overlay.classList.add('hidden');
+    //   };
+
+    //   btnCloseModal.addEventListener('click', closeModal);
+
+
+    ///////////// PROJECT MODAL //////////////////
+
+    // const projectModal = document.querySelector('.project--modal');
+    // const overlay = document.querySelector('.overlay');
+    // const btnCloseModal = document.querySelector('.btn--close-project--modal');
+    // const btnsOpenModal = document.querySelectorAll('.btn--show-project--modal');
+
+    // const openModal = function (e) {
+    //   e.preventDefault();
+    //   projectInfo.classList.remove('hidden');
+    //   // overlay.classList.remove('hidden');
+    // };
+
+    // const closeModal = function () {
+    //   projectInfo.style.visibility = 'hidden';
+    //   // projectInfo.classList.add('hidden');
+    //   // overlay.classList.add('hidden');
+    // };
+
+    // btnsOpenModal.forEach(btn => btn.addEventListener('click', openModal));
+    // btnCloseModal.addEventListener('click', closeModal);
+    // overlay.addEventListener('click', closeModal);
+
+    // document.addEventListener('keydown', function (e) {
+    //   if (e.key === 'Escape' && !projectModal.classList.contains('hidden')) {
+    //     closeModal();
+    //   }
+    // });
+
+///////////////////////////////////////////////////
+
+
+
+      // } else {
+        // tooltip.style.visibility = 'hidden';
+        // }
+
+
+      // }
+
+      // if (intersects[0])
+      //   {console.log(intersects[0].object.position)}
+    // }
+
+
+
 
 
     // Cube 1 texture map
@@ -79,12 +216,12 @@ function init() {
   let texture_rt = new THREE.TextureLoader().load('./img/right.png');
   let texture_lf = new THREE.TextureLoader().load('./img/Hero.png');
 
-  materialArray1.push(new THREE.MeshBasicMaterial({ opacity: 0, transparent: true }));
-  materialArray1.push(new THREE.MeshBasicMaterial({ map: texture_bk }));
-  materialArray1.push(new THREE.MeshBasicMaterial({ map: texture_up }));
-  materialArray1.push(new THREE.MeshBasicMaterial({ map: texture_dn }));
-  materialArray1.push(new THREE.MeshBasicMaterial({ opacity: 0, transparent: true }));
-  materialArray1.push(new THREE.MeshBasicMaterial({ map: texture_lf }));
+  materialArray1.push(new THREE.MeshPhongMaterial({ opacity: 0, transparent: true, map: texture_lf }));
+  materialArray1.push(new THREE.MeshPhongMaterial({ map: texture_bk }));
+  materialArray1.push(new THREE.MeshPhongMaterial({ map: texture_up }));
+  materialArray1.push(new THREE.MeshPhongMaterial({ map: texture_dn }));
+  materialArray1.push(new THREE.MeshPhongMaterial({ opacity: 0, transparent: true, map: texture_lf }));
+  materialArray1.push(new THREE.MeshPhongMaterial({ map: texture_lf }));
 
 
   for (let i = 0; i < 6; i++)
@@ -100,12 +237,12 @@ function init() {
   let texture_rt2 = new THREE.TextureLoader().load('./img/dawg.png');
   let texture_lf2 = new THREE.TextureLoader().load('./img/right.png');
 
-  materialArray2.push(new THREE.MeshBasicMaterial({ opacity: 0, transparent: true, map: texture_ft2 }));
-  materialArray2.push(new THREE.MeshBasicMaterial({ map: texture_bk2 }));
-  materialArray2.push(new THREE.MeshBasicMaterial({ map: texture_up2 }));
-  materialArray2.push(new THREE.MeshBasicMaterial({ map: texture_dn2 }));
-  materialArray2.push(new THREE.MeshBasicMaterial({ map: texture_rt2 }));
-  materialArray2.push(new THREE.MeshBasicMaterial({ opacity: 0, transparent: true }));
+  materialArray2.push(new THREE.MeshPhongMaterial({ opacity: 0, transparent: true, map: texture_ft2 }));
+  materialArray2.push(new THREE.MeshPhongMaterial({ map: texture_bk2 }));
+  materialArray2.push(new THREE.MeshPhongMaterial({ map: texture_up2 }));
+  materialArray2.push(new THREE.MeshPhongMaterial({ map: texture_dn2 }));
+  materialArray2.push(new THREE.MeshPhongMaterial({ map: texture_rt2 }));
+  materialArray2.push(new THREE.MeshPhongMaterial({ opacity: 0, transparent: true, map: texture_lf2 }));
 
   for (let i = 0; i < 6; i++)
   materialArray2[i].side = THREE.BackSide;
@@ -119,12 +256,12 @@ function init() {
   let texture_rt3 = new THREE.TextureLoader().load('./img/gbbank.png');
   let texture_lf3 = new THREE.TextureLoader().load('./img/right.png');
 
-  materialArray3.push(new THREE.MeshBasicMaterial({ map: texture_ft3 }));
-  materialArray3.push(new THREE.MeshBasicMaterial({ opacity: 0, transparent: true, map: texture_bk3 }));
-  materialArray3.push(new THREE.MeshBasicMaterial({ map: texture_up3 }));
-  materialArray3.push(new THREE.MeshBasicMaterial({ map: texture_dn3 }));
-  materialArray3.push(new THREE.MeshBasicMaterial({ map: texture_rt3 }));
-  materialArray3.push(new THREE.MeshBasicMaterial({ opacity: 0, transparent: true, map: texture_lf3 }));
+  materialArray3.push(new THREE.MeshPhongMaterial({ map: texture_ft3 }));
+  materialArray3.push(new THREE.MeshPhongMaterial({ opacity: 0, transparent: true, map: texture_bk3 }));
+  materialArray3.push(new THREE.MeshPhongMaterial({ map: texture_up3 }));
+  materialArray3.push(new THREE.MeshPhongMaterial({ map: texture_dn3 }));
+  materialArray3.push(new THREE.MeshPhongMaterial({ map: texture_rt3 }));
+  materialArray3.push(new THREE.MeshPhongMaterial({ opacity: 0, transparent: true, map: texture_lf3 }));
 
   for (let i = 0; i < 6; i++)
   materialArray3[i].side = THREE.BackSide;
@@ -138,12 +275,12 @@ function init() {
   let texture_rt4 = new THREE.TextureLoader().load('./img/Gumwall.png');
   let texture_lf4 = new THREE.TextureLoader().load('./img/stuud.png');
 
-  materialArray4.push(new THREE.MeshBasicMaterial({ map: texture_ft4 }));
-  materialArray4.push(new THREE.MeshBasicMaterial({ opacity: 0, transparent: true, map: texture_bk4 }));
-  materialArray4.push(new THREE.MeshBasicMaterial({ map: texture_up4 }));
-  materialArray4.push(new THREE.MeshBasicMaterial({ map: texture_dn4 }));
-  materialArray4.push(new THREE.MeshBasicMaterial({ opacity: 0, transparent: true }));
-  materialArray4.push(new THREE.MeshBasicMaterial({ map: texture_lf4 }));
+  materialArray4.push(new THREE.MeshPhongMaterial({ map: texture_ft4 }));
+  materialArray4.push(new THREE.MeshPhongMaterial({ opacity: 0, transparent: true, map: texture_bk4 }));
+  materialArray4.push(new THREE.MeshPhongMaterial({ map: texture_up4 }));
+  materialArray4.push(new THREE.MeshPhongMaterial({ map: texture_dn4 }));
+  materialArray4.push(new THREE.MeshPhongMaterial({ opacity: 0, transparent: true, map: texture_bk4 }));
+  materialArray4.push(new THREE.MeshPhongMaterial({ map: texture_lf4 }));
 
   for (let i = 0; i < 6; i++)
   materialArray4[i].side = THREE.BackSide;
