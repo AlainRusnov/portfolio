@@ -1,15 +1,7 @@
-
-// Alain Rusnov Portfolio -- Proof of Concept 3D
-// V 0.4
-// Getting error on structure fragmentation instead of local load on html :: -->
-// three.min.js:2 Uncaught TypeError: n[i].call is not a function
-// at THREE.OrbitControls.dispatchEvent (three.min.js:2)
-// at THREE.OrbitControls.update (OrbitControls.js:254)
-// at handleMouseMoveRotate (OrbitControls.js:523)
-// at onMouseMove (OrbitControls.js:948)
-// at HTMLDocument.onPointerMove (OrbitControls.js:804)     <---
-// Works but might overload and crash.
-
+/////////////////////////////////////////////////////
+// Alain Rusnov Portfolio --
+// V 0.6
+/////////////////////////////////////////////////////
 
 // import { OrbitControls } from "https://threejs.org/examples/jsm/controls/OrbitControls.js";
 
@@ -18,13 +10,13 @@
 let scene, camera, renderer;
 
 function init() {
-  // const canvas = document.querySelector('#c'); // Skybox and outdoor scene // Later
+  const canvas = document.querySelector('#c'); // Skybox and outdoor scene // Later
 	// document.body.appendChild( container );
 
 
   ///////////// Scene + Cam /////////////////////////
   scene = new THREE.Scene();
-  camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 60, 200000);
+  camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 60, 350000);
   camera.position.set(10000, -100, 12000);
 
   /////////// WebGL /////////////////////
@@ -36,7 +28,7 @@ function init() {
   ////////////// Camera/Mouse controls - ///////////////// Issues on file restructure for three.js error nil[i]
 
   let controls = new THREE.OrbitControls(camera, renderer.domElement);
-  controls.addEventListener('change', renderer.domElement);
+  // controls.addEventListener('change', renderer.domElement); // was causing typeerror
 				controls.listenToKeyEvents( window ); // keys...
 
 				controls.enableDamping = true; // ( use later ) // an animation loop is required when either damping or auto-rotation are enabled
@@ -44,7 +36,7 @@ function init() {
 
 				controls.screenSpacePanning = false;
 
-				controls.maxPolarAngle = Math.PI / 2;
+				// controls.maxPolarAngle = Math.PI / 2;
   // controls.minDistance = 3000;
   // controls.maxDistance = 3000;
     controls.keys = {
@@ -80,6 +72,45 @@ function init() {
     // // materialContainer.side = THREE.Backside;
     // const container = new THREE.Mesh(geometry, materialContainer);
     // scene.add(container);
+
+//////////////// Skybox ///////////////////
+
+    // let loader = new THREE.CubeTextureLoader();
+    // let skybox = loader.load([
+    //   './img/skybox/px.png',
+    //   './img/skybox/nx.png',
+    //   './img/skybox/py.png',
+    //   './img/skybox/ny.png',
+    //   './img/skybox/pz.png',
+    //   './img/skybox/nz.png',
+    // ]);
+
+    // scene.background = skybox;
+
+  let skybox = [];
+  let texture_ftSky = new THREE.TextureLoader().load('./img/skybox/px.png');
+  let texture_bkSky = new THREE.TextureLoader().load('./img/skybox/nx.png');
+  let texture_upSky = new THREE.TextureLoader().load('./img/skybox/py.png');
+  let texture_dnSky = new THREE.TextureLoader().load('./img/skybox/ny.png');
+  let texture_rtSky = new THREE.TextureLoader().load('./img/skybox/pz.png');
+  let texture_lfSky = new THREE.TextureLoader().load('./img/skybox/nz.png');
+
+  skybox.push(new THREE.MeshBasicMaterial({ map: texture_ftSky }));
+  skybox.push(new THREE.MeshBasicMaterial({ map: texture_bkSky }));
+  skybox.push(new THREE.MeshBasicMaterial({ map: texture_upSky }));
+  skybox.push(new THREE.MeshBasicMaterial({ map: texture_dnSky }));
+  skybox.push(new THREE.MeshBasicMaterial({ map: texture_rtSky }));
+  skybox.push(new THREE.MeshBasicMaterial({ map: texture_lfSky }));
+
+    for (let i = 0; i < 6; i++)
+    skybox[i].side = THREE.BackSide;
+
+    let skyboxGeo = new THREE.BoxGeometry(300000, 300000, 300000);
+    let outdoor = new THREE.Mesh(skyboxGeo, skybox);
+    outdoor.position.set(-75000, 0, -50000);
+    outdoor.rotation.set(0, Math.PI / 2 * 1.5,0);
+    scene.add(outdoor);
+
 
 
   //////////// Wireframe Intersect Objects /////////////////////////////////////////////////
@@ -147,23 +178,25 @@ function init() {
           tooltip.innerHTML = coords;
           let name = coords;
           const projectInfo = document.getElementById(`${name}`);
+          const modal = document.getElementById("modal");
           tooltip.style.visibility = 'visible';
             tooltip.style.top = event.clientY + 'px';
             tooltip.style.left = event.clientX + 20 + 'px';
             window.addEventListener( 'click', onClick );
             function onClick() {
-              tooltip.style.visibility === 'visible' ? projectInfo.style.visibility = 'visible': projectInfo.style.visibility = 'hidden';
+              tooltip.style.visibility === 'visible' ? (projectInfo.style.visibility = 'visible') && (modal.style.visibility = 'visible') : (projectInfo.style.visibility = 'hidden') && (modal.style.visibility = 'hidden');
             };
 
-              document.addEventListener('keydown', function (e) {
-                if (e.key === 'Escape') {
-                  closeModal();
-                  }
-                });
+              // document.addEventListener('keydown', function (e) {
+              //   if (e.key === 'Escape') {
+              //     closeModal();
+              //     }
+              //   });
                 // console.log(projectInfo);
                 // console.log(name);
                 // coords = "";
                 // projectInfo = "";
+                console.log(coords);
             } else {
             tooltip.style.visibility = 'hidden';
             // coords = "";
@@ -171,7 +204,6 @@ function init() {
             };
       } else {
             tooltip.style.visibility = 'hidden';
-            // coords = "";
             // projectInfo = "";
 
       };
@@ -265,17 +297,17 @@ function init() {
     // Cube 1 texture map
   let materialArray1 = [];
   let texture_ft = new THREE.TextureLoader().load('./img/left.png');
-  let texture_bk = new THREE.TextureLoader().load('./img/door.png');
+  let texture_bk = new THREE.TextureLoader().load('./img/doortr.png');
   let texture_up = new THREE.TextureLoader().load('./img/up1.png');
   let texture_dn = new THREE.TextureLoader().load('./img/down.png');
   let texture_rt = new THREE.TextureLoader().load('./img/right.png');
   let texture_lf = new THREE.TextureLoader().load('./img/Hero.png');
 
-  materialArray1.push(new THREE.MeshPhongMaterial({ opacity: 0, transparent: true, map: texture_lf }));
-  materialArray1.push(new THREE.MeshPhongMaterial({ map: texture_bk }));
+  materialArray1.push(new THREE.MeshPhongMaterial({ opacity: 0, transparent: true, depthWrite: false, map: texture_lf }));
+  materialArray1.push(new THREE.MeshPhongMaterial({ opacity: 100, transparent: true, depthWrite: false, map: texture_bk }));
   materialArray1.push(new THREE.MeshPhongMaterial({ map: texture_up }));
   materialArray1.push(new THREE.MeshPhongMaterial({ map: texture_dn }));
-  materialArray1.push(new THREE.MeshPhongMaterial({ opacity: 0, transparent: true, map: texture_lf }));
+  materialArray1.push(new THREE.MeshPhongMaterial({ opacity: 0, transparent: true, depthWrite: false, map: texture_lf }));
   materialArray1.push(new THREE.MeshPhongMaterial({ map: texture_lf }));
 
 
@@ -286,18 +318,18 @@ function init() {
   // Cube 2 texture map
   let materialArray2 = [];
   let texture_ft2 = new THREE.TextureLoader().load('./img/right.png');
-  let texture_bk2 = new THREE.TextureLoader().load('./img/window.png');
+  let texture_bk2 = new THREE.TextureLoader().load('./img/windowtr.png');
   let texture_up2 = new THREE.TextureLoader().load('./img/up2.png');
   let texture_dn2= new THREE.TextureLoader().load('./img/down.png');
   let texture_rt2 = new THREE.TextureLoader().load('./img/dawg.png');
   let texture_lf2 = new THREE.TextureLoader().load('./img/right.png');
 
-  materialArray2.push(new THREE.MeshPhongMaterial({ opacity: 0, transparent: true, map: texture_ft2 }));
-  materialArray2.push(new THREE.MeshPhongMaterial({ map: texture_bk2 }));
+  materialArray2.push(new THREE.MeshPhongMaterial({ opacity: 0, transparent: true, depthWrite: false, map: texture_ft2 }));
+  materialArray2.push(new THREE.MeshPhongMaterial({ opacity: 100, transparent: true, depthWrite: false, map: texture_bk2 }));
   materialArray2.push(new THREE.MeshPhongMaterial({ map: texture_up2 }));
   materialArray2.push(new THREE.MeshPhongMaterial({ map: texture_dn2 }));
   materialArray2.push(new THREE.MeshPhongMaterial({ map: texture_rt2 }));
-  materialArray2.push(new THREE.MeshPhongMaterial({ opacity: 0, transparent: true, map: texture_lf2 }));
+  materialArray2.push(new THREE.MeshPhongMaterial({ opacity: 0, transparent: true, depthWrite: false, map: texture_lf2 }));
 
   for (let i = 0; i < 6; i++)
   materialArray2[i].side = THREE.BackSide;
@@ -312,11 +344,11 @@ function init() {
   let texture_lf3 = new THREE.TextureLoader().load('./img/right.png');
 
   materialArray3.push(new THREE.MeshPhongMaterial({ map: texture_ft3 }));
-  materialArray3.push(new THREE.MeshPhongMaterial({ opacity: 0, transparent: true, map: texture_bk3 }));
+  materialArray3.push(new THREE.MeshPhongMaterial({ opacity: 0, transparent: true, depthWrite: false, map: texture_bk3 }));
   materialArray3.push(new THREE.MeshPhongMaterial({ map: texture_up3 }));
   materialArray3.push(new THREE.MeshPhongMaterial({ map: texture_dn3 }));
   materialArray3.push(new THREE.MeshPhongMaterial({ map: texture_rt3 }));
-  materialArray3.push(new THREE.MeshPhongMaterial({ opacity: 0, transparent: true, map: texture_lf3 }));
+  materialArray3.push(new THREE.MeshPhongMaterial({ opacity: 0, transparent: true, depthWrite: false, map: texture_lf3 }));
 
   for (let i = 0; i < 6; i++)
   materialArray3[i].side = THREE.BackSide;
@@ -331,10 +363,10 @@ function init() {
   let texture_lf4 = new THREE.TextureLoader().load('./img/stuud.png');
 
   materialArray4.push(new THREE.MeshPhongMaterial({ map: texture_ft4 }));
-  materialArray4.push(new THREE.MeshPhongMaterial({ opacity: 0, transparent: true, map: texture_bk4 }));
+  materialArray4.push(new THREE.MeshPhongMaterial({ opacity: 0, transparent: true, depthWrite: false, map: texture_bk4 }));
   materialArray4.push(new THREE.MeshPhongMaterial({ map: texture_up4 }));
   materialArray4.push(new THREE.MeshPhongMaterial({ map: texture_dn4 }));
-  materialArray4.push(new THREE.MeshPhongMaterial({ opacity: 0, transparent: true, map: texture_bk4 }));
+  materialArray4.push(new THREE.MeshPhongMaterial({ opacity: 0, transparent: true, depthWrite: false, map: texture_bk4 }));
   materialArray4.push(new THREE.MeshPhongMaterial({ map: texture_lf4 }));
 
   for (let i = 0; i < 6; i++)
