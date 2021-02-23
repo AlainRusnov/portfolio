@@ -1,3 +1,9 @@
+// V 0.6 // Added vertex overlay for Raytracing object Intersection - modal project info displaying ( to do: implement API to populate ) - site "functional"
+
+![Screenshot (276)](https://user-images.githubusercontent.com/71734708/108891740-11b18180-75dd-11eb-9ef3-82228b8c8801.png)
+![Screenshot (275)](https://user-images.githubusercontent.com/71734708/108891748-137b4500-75dd-11eb-98af-8b3d1f617847.png)
+
+
 // V 0.51 // Social links overlay - rudimentary controls on right click drag + keyboard keys ( must tweak ).
 
 ![Screenshot (271)](https://user-images.githubusercontent.com/71734708/108639710-e0617600-7463-11eb-822e-c08ab6a7f9cb.png)
