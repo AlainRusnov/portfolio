@@ -110,10 +110,10 @@ a {
 	/* z-index: 100; */
 }
 
-.hidden {
+/* .hidden {
   visibility: hidden;
   opacity: 0;
-}
+} */
 
 h1 {
 	font-family: 'Roboto';
@@ -125,4 +125,8 @@ p {
 	/* font-family: 'Roboto'; */
 	font-size: 1.10rem;
 	color: rgb(61, 60, 63);
+}
+
+.project-link {
+	font-size: 1.10rem;
 }

@@ -54,7 +54,7 @@ function init() {
       BOTTOM: 40 // down arrow
     }
 
-    controls.keyPanSpeed = 60; // Keyboard move speed ( janky )
+    controls.keyPanSpeed = 50; // Keyboard move speed ( janky )
     controls.panSpeed = 15;
 
     // Reassign controls ( review for mobile )
@@ -85,7 +85,7 @@ function init() {
   //////////// Wireframe Intersect Objects /////////////////////////////////////////////////
 
   let projectGeo = new THREE.BoxGeometry(25000, 15000, 50);
-  let projectMaterial = new THREE.MeshPhongMaterial({ opacity: 0, color: 0xff, wireframe: true }); // wireframe: true transparent: true
+  let projectMaterial = new THREE.MeshPhongMaterial({ opacity: 0, color: 0xff, transparent: true }); // wireframe: true transparent: true
 
   let stuud = new THREE.Mesh(projectGeo, projectMaterial);
   stuud.name = "stuud";
@@ -131,7 +131,6 @@ function init() {
 
       const intersects = raycaster.intersectObjects( scene.children );
       const tooltip = document.getElementById("tooltip");
-      const projectInfo = document.getElementById("modal");
 
       const closeModal = function () {
         projectInfo.style.visibility = 'hidden';
@@ -140,14 +139,15 @@ function init() {
       if (intersects[0]) {
 
         let coords = intersects[0].object.name; // Naming convention allows for wireframe detection + data call
-        console.log(coords);
+        // console.log(coords);
 
-          if (coords.match(/^[a-z]+$/)) {//"stuud" || "gumball-viewer" || "gumball-bank" || "dawg" ) {
+        if (coords.match(/^[a-z]+$/)) {
           // ? console.log(true): console.log(false));
-            // console.log(true);
-            tooltip.innerHTML = coords;
-            let name = coords;
-            tooltip.style.visibility = 'visible';
+          // console.log(true);
+          tooltip.innerHTML = coords;
+          let name = coords;
+          const projectInfo = document.getElementById(`${name}`);
+          tooltip.style.visibility = 'visible';
             tooltip.style.top = event.clientY + 'px';
             tooltip.style.left = event.clientX + 20 + 'px';
             window.addEventListener( 'click', onClick );
@@ -160,9 +160,20 @@ function init() {
                   closeModal();
                   }
                 });
+                // console.log(projectInfo);
+                // console.log(name);
+                // coords = "";
+                // projectInfo = "";
             } else {
             tooltip.style.visibility = 'hidden';
-            }
+            // coords = "";
+            // projectInfo = "";
+            };
+      } else {
+            tooltip.style.visibility = 'hidden';
+            // coords = "";
+            // projectInfo = "";
+
       };
     };
 
