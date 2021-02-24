@@ -4,6 +4,8 @@
 /////////////////////////////////////////////////////
 
 // import { OrbitControls } from "https://threejs.org/examples/jsm/controls/OrbitControls.js";
+// import { GLTFLoader } from 'https://cdn.rawgit.com/mrdoob/three.js/master/examples/js/loaders/GLTFLoader.js';
+
 
 
 
@@ -29,18 +31,18 @@ function init() {
 
   let controls = new THREE.OrbitControls(camera, renderer.domElement);
   // controls.addEventListener('change', renderer.domElement); // was causing typeerror
-				controls.listenToKeyEvents( window ); // keys...
+  controls.listenToKeyEvents( window ); // keys...
 
-				controls.enableDamping = true; // ( use later ) // an animation loop is required when either damping or auto-rotation are enabled
-				controls.dampingFactor = 0.5;
+  controls.enableDamping = true; // ( use later ) // an animation loop is required when either damping or auto-rotation are enabled
+  controls.dampingFactor = 0.5;
 
-				controls.screenSpacePanning = false;
+  controls.screenSpacePanning = false;
 
-				// controls.maxPolarAngle = Math.PI / 2;
+  // controls.maxPolarAngle = Math.PI / 2;
   // controls.minDistance = 3000;
   // controls.maxDistance = 3000;
-    controls.keys = {
-      LEFT: 37, //left arrow
+  controls.keys = {
+    LEFT: 37, //left arrow
       UP: 38, // up arrow
       RIGHT: 39, // right arrow
       BOTTOM: 40 // down arrow
@@ -56,10 +58,10 @@ function init() {
       RIGHT: THREE.MOUSE.PAN,
     }
 
-  ///////// Lighting ////////////////
+    ///////// Lighting ////////////////
 
     const ambientLight = new THREE.AmbientLight( 0xcccccc );
-				scene.add( ambientLight );
+    scene.add( ambientLight );
 
     // const directionalLight = new THREE.DirectionalLight( 0xffffff, 0.2 );
     // directionalLight.position.set( 9000, 100, 9000 ).normalize();
@@ -73,7 +75,7 @@ function init() {
     // const container = new THREE.Mesh(geometry, materialContainer);
     // scene.add(container);
 
-//////////////// Skybox ///////////////////
+    //////////////// Skybox ///////////////////
 
     // let loader = new THREE.CubeTextureLoader();
     // let skybox = loader.load([
@@ -86,19 +88,20 @@ function init() {
     // ]);
 
     // scene.background = skybox;
+    // scene.background.rotateY(0.5);
 
-  let skybox = [];
-  let texture_ftSky = new THREE.TextureLoader().load('./img/skybox/px.png');
-  let texture_bkSky = new THREE.TextureLoader().load('./img/skybox/nx.png');
-  let texture_upSky = new THREE.TextureLoader().load('./img/skybox/py.png');
-  let texture_dnSky = new THREE.TextureLoader().load('./img/skybox/ny.png');
-  let texture_rtSky = new THREE.TextureLoader().load('./img/skybox/pz.png');
-  let texture_lfSky = new THREE.TextureLoader().load('./img/skybox/nz.png');
+    let skybox = [];
+    let texture_ftSky = new THREE.TextureLoader().load('./img/skybox/px.png');
+    let texture_bkSky = new THREE.TextureLoader().load('./img/skybox/nx.png');
+    let texture_upSky = new THREE.TextureLoader().load('./img/skybox/py.png');
+    let texture_dnSky = new THREE.TextureLoader().load('./img/skybox/ny.png');
+    let texture_rtSky = new THREE.TextureLoader().load('./img/skybox/pz.png');
+    let texture_lfSky = new THREE.TextureLoader().load('./img/skybox/nz.png');
 
-  skybox.push(new THREE.MeshBasicMaterial({ map: texture_ftSky }));
-  skybox.push(new THREE.MeshBasicMaterial({ map: texture_bkSky }));
-  skybox.push(new THREE.MeshBasicMaterial({ map: texture_upSky }));
-  skybox.push(new THREE.MeshBasicMaterial({ map: texture_dnSky }));
+    skybox.push(new THREE.MeshBasicMaterial({ map: texture_ftSky }));
+    skybox.push(new THREE.MeshBasicMaterial({ map: texture_bkSky }));
+    skybox.push(new THREE.MeshBasicMaterial({ map: texture_upSky }));
+    skybox.push(new THREE.MeshBasicMaterial({ map: texture_dnSky }));
   skybox.push(new THREE.MeshBasicMaterial({ map: texture_rtSky }));
   skybox.push(new THREE.MeshBasicMaterial({ map: texture_lfSky }));
 
@@ -111,7 +114,25 @@ function init() {
     outdoor.rotation.set(0, Math.PI / 2 * 1.5,0);
     scene.add(outdoor);
 
+  //////////// 3D models //////////////////////////////////
 
+  // const loader = new GLTFLoader();
+  let tableLoader = new THREE.GLTFLoader();
+  tableLoader.load('./img/models/table/scene.gltf', function(gltf){
+    table = gltf.scene.children[0];
+    table.scale.set(5000,5000,5000);
+    table.position.set(13000, -9000, -20000);
+    // table.rotation.set(0,0,0);
+    scene.add(gltf.scene);
+  });
+  // let diningLoader = new THREE.GLTFLoader();
+  // diningLoader.load('./img/models/dining/scene.gltf', function(gltf){
+  //   dining = gltf.scene.children[0];
+  //   dining.scale.set(200,200,200);
+  //   dining.position.set(13000, -9000, -10000);
+  //   // table.rotation.set(0,0,0);
+  //   scene.add(gltf.scene);
+  // });
 
   //////////// Wireframe Intersect Objects /////////////////////////////////////////////////
 
