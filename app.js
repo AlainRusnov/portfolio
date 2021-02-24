@@ -27,7 +27,7 @@ function init() {
   renderer.setClearColor(0x0000FF, 0.1);
   document.body.appendChild(renderer.domElement);
 
-  ////////////// Camera/Mouse controls - ///////////////// Issues on file restructure for three.js error nil[i]
+  ////////////// Camera/Mouse controls - /////////////////
 
   let controls = new THREE.OrbitControls(camera, renderer.domElement);
   // controls.addEventListener('change', renderer.domElement); // was causing typeerror
@@ -48,8 +48,8 @@ function init() {
       BOTTOM: 40 // down arrow
     }
 
-    controls.keyPanSpeed = 50; // Keyboard move speed ( janky )
-    controls.panSpeed = 15;
+    controls.keyPanSpeed = 60; // Keyboard move speed ( janky )
+    controls.panSpeed = 13;
 
     // Reassign controls ( review for mobile )
     controls.mouseButtons = {
@@ -60,20 +60,13 @@ function init() {
 
     ///////// Lighting ////////////////
 
-    const ambientLight = new THREE.AmbientLight( 0xcccccc );
+    const ambientLight = new THREE.AmbientLight( 0xcccccc, 1.1 );
     scene.add( ambientLight );
 
     // const directionalLight = new THREE.DirectionalLight( 0xffffff, 0.2 );
     // directionalLight.position.set( 9000, 100, 9000 ).normalize();
     // scene.add( directionalLight );
 
-    // const geometry = new THREE.BoxGeometry(100000, 100000, 100000);
-    // let textureContainer = new THREE.TextureLoader().load('./img/gumball.jpg');
-
-    // const materialContainer = new THREE.MeshBasicMaterial( { map: textureContainer } );
-    // // materialContainer.side = THREE.Backside;
-    // const container = new THREE.Mesh(geometry, materialContainer);
-    // scene.add(container);
 
     //////////////// Skybox ///////////////////
 
@@ -87,52 +80,117 @@ function init() {
     //   './img/skybox/nz.png',
     // ]);
 
-    // scene.background = skybox;
+    let skybox = new THREE.TextureLoader().load('./img/sky.jpg');
+    scene.background = skybox;
     // scene.background.rotateY(0.5);
 
-    let skybox = [];
-    let texture_ftSky = new THREE.TextureLoader().load('./img/skybox/px.png');
-    let texture_bkSky = new THREE.TextureLoader().load('./img/skybox/nx.png');
-    let texture_upSky = new THREE.TextureLoader().load('./img/skybox/py.png');
-    let texture_dnSky = new THREE.TextureLoader().load('./img/skybox/ny.png');
-    let texture_rtSky = new THREE.TextureLoader().load('./img/skybox/pz.png');
-    let texture_lfSky = new THREE.TextureLoader().load('./img/skybox/nz.png');
+    // let skybox = [];
+    // let texture_ftSky = new THREE.TextureLoader().load('./img/skybox/px.png');
+    // let texture_bkSky = new THREE.TextureLoader().load('./img/skybox/nx.png');
+    // let texture_upSky = new THREE.TextureLoader().load('./img/skybox/py.png');
+    // let texture_dnSky = new THREE.TextureLoader().load('./img/skybox/ny.png');
+    // let texture_rtSky = new THREE.TextureLoader().load('./img/skybox/pz.png');
+    // let texture_lfSky = new THREE.TextureLoader().load('./img/skybox/nz.png');
 
-    skybox.push(new THREE.MeshBasicMaterial({ map: texture_ftSky }));
-    skybox.push(new THREE.MeshBasicMaterial({ map: texture_bkSky }));
-    skybox.push(new THREE.MeshBasicMaterial({ map: texture_upSky }));
-    skybox.push(new THREE.MeshBasicMaterial({ map: texture_dnSky }));
-  skybox.push(new THREE.MeshBasicMaterial({ map: texture_rtSky }));
-  skybox.push(new THREE.MeshBasicMaterial({ map: texture_lfSky }));
+    // skybox.push(new THREE.MeshBasicMaterial({ map: texture_ftSky }));
+    // skybox.push(new THREE.MeshBasicMaterial({ map: texture_bkSky }));
+    // skybox.push(new THREE.MeshBasicMaterial({ map: texture_upSky }));
+    // skybox.push(new THREE.MeshBasicMaterial({ map: texture_dnSky }));
+    // skybox.push(new THREE.MeshBasicMaterial({ map: texture_rtSky }));
+    // skybox.push(new THREE.MeshBasicMaterial({ map: texture_lfSky }));
 
-    for (let i = 0; i < 6; i++)
-    skybox[i].side = THREE.BackSide;
+    // for (let i = 0; i < 6; i++)
+    // skybox[i].side = THREE.BackSide;
 
-    let skyboxGeo = new THREE.BoxGeometry(300000, 300000, 300000);
-    let outdoor = new THREE.Mesh(skyboxGeo, skybox);
-    outdoor.position.set(-75000, 0, -50000);
-    outdoor.rotation.set(0, Math.PI / 2 * 1.5,0);
-    scene.add(outdoor);
+    // let skyboxGeo = new THREE.BoxGeometry(300000, 300000, 300000);
+    // let outdoor = new THREE.Mesh(skyboxGeo, skybox);
+    // outdoor.position.set(-75000, 0, -50000);
+    // outdoor.rotation.set(0, Math.PI / 2 * 1.5,0);
+    // scene.add(outdoor);
 
   //////////// 3D models //////////////////////////////////
 
-  // const loader = new GLTFLoader();
+
   let tableLoader = new THREE.GLTFLoader();
   tableLoader.load('./img/models/table/scene.gltf', function(gltf){
     table = gltf.scene.children[0];
     table.scale.set(5000,5000,5000);
-    table.position.set(13000, -9000, -20000);
-    // table.rotation.set(0,0,0);
+    table.position.set(45000, -9000, 12000);
+    table.rotation.set(Math.PI/2,Math.PI/3 * 3,Math.PI/2);
     scene.add(gltf.scene);
   });
-  // let diningLoader = new THREE.GLTFLoader();
-  // diningLoader.load('./img/models/dining/scene.gltf', function(gltf){
-  //   dining = gltf.scene.children[0];
-  //   dining.scale.set(200,200,200);
-  //   dining.position.set(13000, -9000, -10000);
-  //   // table.rotation.set(0,0,0);
-  //   scene.add(gltf.scene);
-  // });
+
+  benchLoader = new THREE.GLTFLoader();
+  benchLoader.load('./img/models/bench/scene.gltf', function(gltf){
+    bench = gltf.scene.children[0];
+    bench.scale.set(9000,9000,9000);
+    bench.position.set(-27500, -9000, 28000);
+    bench.rotation.set(Math.PI/2,Math.PI/3 * 3,Math.PI/2);
+    scene.add(gltf.scene);
+  });
+
+  let plantLoader = new THREE.GLTFLoader();
+  plantLoader.load('./img/models/plant/scene.gltf', function(gltf){
+    plant = gltf.scene.children[0];
+    plant.scale.set(1200,1200,1200);
+    plant.position.set(-29500, -15000, -22000);
+    plant.rotation.set(Math.PI/2,Math.PI/3 * 3,Math.PI/2);
+    scene.add(gltf.scene);
+  });
+
+  let catLoader = new THREE.GLTFLoader();
+  catLoader.load('./img/models/cat/scene.gltf', function(gltf){
+    cat = gltf.scene.children[0];
+    cat.scale.set(10,10,10);
+    cat.position.set(45000, -3000, 12000);
+    cat.rotation.set(Math.PI/2,Math.PI/3 * 3,Math.PI/2);
+    scene.add(gltf.scene);
+  });
+
+
+
+  //////////// Outdoor wireframe /////////////////////////////////////////////
+
+  let sidewalkGeo = new THREE.BoxGeometry(150000,1,10000);
+  let sidewalkTxt = new THREE.TextureLoader().load('./img/sidewalk.jpg');
+   ////// txt repeat /////
+    sidewalkTxt.wrapS = THREE.RepeatWrapping;
+    sidewalkTxt.wrapT = THREE.RepeatWrapping;
+
+    const RepeatHorizon = 6;
+    const RepeatVert = 2;
+    sidewalkTxt.repeat.set(RepeatHorizon, RepeatVert);
+
+  let sidewalkMaterial = new THREE.MeshBasicMaterial({ map: sidewalkTxt });
+  const sidewalk = new THREE.Mesh( sidewalkGeo, sidewalkMaterial );
+  sidewalk.position.set(-27500, -12500, -1000);
+  sidewalk.rotation.set(Math.PI/2, Math.PI/2, Math.PI/2);
+  scene.add(sidewalk);
+
+  let sidewalk2Geo = new THREE.BoxGeometry(250000,1,10000);
+  const sidewalk2 = new THREE.Mesh( sidewalk2Geo, sidewalkMaterial );
+  sidewalk2.position.set(-130000, -13450, -1000);
+  sidewalk2.rotation.set(Math.PI/2, Math.PI/2, Math.PI/2);
+  scene.add(sidewalk2);
+
+  let streetGeo = new THREE.BoxGeometry(250000,1,100000);
+  let streetTxt = new THREE.TextureLoader().load('./img/streetflat.jpg');
+    ////// txt repeat /////
+    streetTxt.wrapS = THREE.RepeatWrapping;
+    streetTxt.wrapT = THREE.RepeatWrapping;
+
+    const RepeatStreetHorizon = 6;
+    const RepeatStreetVert = 2;
+    streetTxt.repeat.set(RepeatStreetHorizon, RepeatStreetVert);
+
+
+  let streetMaterial = new THREE.MeshBasicMaterial({ map: streetTxt }); // wireframe: true
+  const street = new THREE.Mesh( streetGeo, streetMaterial );
+  street.position.set(-82000, -13500, -1000);
+  street.rotation.set(Math.PI/2, Math.PI/2, Math.PI/2);
+  scene.add(street);
+
+
 
   //////////// Wireframe Intersect Objects /////////////////////////////////////////////////
 
@@ -151,7 +209,9 @@ function init() {
   let dawg = new THREE.Mesh(projectGeo, projectMaterial);
   dawg.name = "dawg";
 
+  ///////////////////////////////////////////////////////////////////////////////////////////
   /////////// Wireframe Intersect Objects Positions /////////////////////////////////////////
+
 
   stuud.position.set(30000, -2000, -22900); // z:-23000 is flush with wall bounds
   scene.add(stuud);
@@ -166,7 +226,10 @@ function init() {
   dawg.position.set(-5000, 2000, 37000); // z:-37000 is flush with wall bounds
   scene.add(dawg);
 
+  /////////////////////////////////////////////////////////////////////////////////////////////////////////////
   ////////// Raycasting // Intersect Object Logic Gate with tooltip and Modal  ////////////////////////////////
+
+
 
     const mouse = new THREE.Vector2();
 
@@ -184,9 +247,9 @@ function init() {
       const intersects = raycaster.intersectObjects( scene.children );
       const tooltip = document.getElementById("tooltip");
 
-      const closeModal = function () {
-        projectInfo.style.visibility = 'hidden';
-      };
+      // const closeModal = function () {
+      //   projectInfo.style.visibility = 'hidden';
+      // };
 
       if (intersects[0]) {
 
@@ -274,21 +337,8 @@ function init() {
 ///////////////////////////////////////////////////
 
 
-
-      // } else {
-        // tooltip.style.visibility = 'hidden';
-        // }
-
-
-      // }
-
-      // if (intersects[0])
-      //   {console.log(intersects[0].object.position)}
-    // }
-
-
-///////////// MODULAR BUILD ///////////////
-//// Schema Top view ////
+/////////// MODULAR BUILD ///////////////
+////////// Schema Top view //////////////
 
                //Front
 
