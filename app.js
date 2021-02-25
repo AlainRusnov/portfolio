@@ -80,7 +80,7 @@ function init() {
     //   './img/skybox/nz.png',
     // ]);
 
-    let skybox = new THREE.TextureLoader().load('./img/sunset6.png');
+    let skybox = new THREE.TextureLoader().load('./img/sky3.png');
     scene.background = skybox;
     // scene.background.rotateY(0.5);
 
@@ -291,7 +291,7 @@ function init() {
 
     let sunMaterial = new THREE.MeshBasicMaterial({ opacity: 100, transparent: true, depthWrite: false, map: sunTxt });
     const sun = new THREE.Mesh( sunGeo, sunMaterial );
-    sun.position.set(-400000, 40500, -170000);
+    sun.position.set(-500000, 45500, -200000);
     sun.rotation.set(Math.PI/2, 0, Math.PI/2);
     scene.add(sun);
 
