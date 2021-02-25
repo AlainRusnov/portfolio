@@ -18,7 +18,7 @@ function init() {
 
   ///////////// Scene + Cam /////////////////////////
   scene = new THREE.Scene();
-  camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 60, 350000);
+  camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 60, 800000);
   camera.position.set(10000, -100, 12000);
 
   /////////// WebGL /////////////////////
@@ -80,7 +80,7 @@ function init() {
     //   './img/skybox/nz.png',
     // ]);
 
-    let skybox = new THREE.TextureLoader().load('./img/sky.jpg');
+    let skybox = new THREE.TextureLoader().load('./img/sunset6.png');
     scene.background = skybox;
     // scene.background.rotateY(0.5);
 
@@ -189,6 +189,131 @@ function init() {
   street.position.set(-82000, -13500, -1000);
   street.rotation.set(Math.PI/2, Math.PI/2, Math.PI/2);
   scene.add(street);
+
+
+  /////////// Waves //////////////////////////////
+  let wave1Geo = new THREE.BoxGeometry(800000,1,70000);
+  let wave1Txt = new THREE.TextureLoader().load('./img/wave.png');
+   ////// txt repeat /////
+    wave1Txt.wrapS = THREE.RepeatWrapping;
+    wave1Txt.wrapT = THREE.RepeatWrapping;
+
+    const RepeatWave1Horizon = 2;
+    const RepeatWave1Vert = 1;
+    wave1Txt.repeat.set(RepeatWave1Horizon, RepeatWave1Vert);
+    // wave1Txt.flipY = false;
+
+    let wave1Material = new THREE.MeshBasicMaterial({ opacity: 100, transparent: true, depthWrite: false, map: wave1Txt });
+    const wave1 = new THREE.Mesh( wave1Geo, wave1Material );
+    wave1.position.set(-190000, -15500, 30000);
+    wave1.rotation.set(Math.PI/2, 0, Math.PI/2);
+    scene.add(wave1);
+
+
+    let wave2Geo = new THREE.BoxGeometry(800000,1,60000);
+    let wave2Txt = new THREE.TextureLoader().load('./img/wave.png');
+   ////// txt repeat /////
+    wave2Txt.wrapS = THREE.RepeatWrapping;
+    wave2Txt.wrapT = THREE.RepeatWrapping;
+
+    const RepeatWave2Horizon = 2;
+    const RepeatWave2Vert = 1;
+    wave2Txt.repeat.set(RepeatWave2Horizon, RepeatWave2Vert);
+
+    let wave2Material = new THREE.MeshBasicMaterial({ opacity: 100, transparent: true, depthWrite: false, map: wave2Txt });
+    const wave2 = new THREE.Mesh( wave2Geo, wave2Material );
+    wave2.position.set(-250000, -16000, 20000);
+    wave2.rotation.set(Math.PI/2, 0, Math.PI/2);
+    scene.add(wave2);
+
+    let wave3Geo = new THREE.BoxGeometry(800000,1,50000);
+    let wave3Txt = new THREE.TextureLoader().load('./img/wave.png');
+   ////// txt repeat /////
+    wave3Txt.wrapS = THREE.RepeatWrapping;
+    wave3Txt.wrapT = THREE.RepeatWrapping;
+
+    const RepeatWave3Horizon = 3;
+    const RepeatWave3Vert = 1;
+    wave3Txt.repeat.set(RepeatWave3Horizon, RepeatWave3Vert);
+    // wave3Txt.flipY = false;
+
+    let wave3Material = new THREE.MeshBasicMaterial({ opacity: 100, transparent: true, depthWrite: false, map: wave3Txt });
+    const wave3 = new THREE.Mesh( wave3Geo, wave3Material );
+    wave3.position.set(-300000, -13500, 30000);
+    wave3.rotation.set(Math.PI/2, 0, Math.PI/2);
+    scene.add(wave3);
+
+    let wave4Geo = new THREE.BoxGeometry(800000,1,50000);
+    let wave4Txt = new THREE.TextureLoader().load('./img/wave.png');
+   ////// txt repeat /////
+    wave4Txt.wrapS = THREE.RepeatWrapping;
+    wave4Txt.wrapT = THREE.RepeatWrapping;
+
+    const RepeatWave4Horizon = 2;
+    const RepeatWave4Vert = 1;
+    wave4Txt.repeat.set(RepeatWave4Horizon, RepeatWave4Vert);
+
+    let wave4Material = new THREE.MeshBasicMaterial({ opacity: 100, transparent: true, depthWrite: false, map: wave4Txt });
+    const wave4 = new THREE.Mesh( wave4Geo, wave4Material );
+    wave4.position.set(-350000, -12000, 60000);
+    wave4.rotation.set(Math.PI/2, 0, Math.PI/2);
+    scene.add(wave4);
+
+    let wave5Geo = new THREE.BoxGeometry(800000,1,30000);
+    let wave5Txt = new THREE.TextureLoader().load('./img/wave.png');
+   ////// txt repeat /////
+    wave5Txt.wrapS = THREE.RepeatWrapping;
+    wave5Txt.wrapT = THREE.RepeatWrapping;
+
+    const RepeatWave5Horizon = 2;
+    const RepeatWave5Vert = 1;
+    wave5Txt.repeat.set(RepeatWave5Horizon, RepeatWave5Vert);
+    // wave5Txt.flipY = false;
+
+    let wave5Material = new THREE.MeshBasicMaterial({ opacity: 100, transparent: true, depthWrite: false, map: wave5Txt });
+    const wave5 = new THREE.Mesh( wave5Geo, wave5Material );
+    wave5.position.set(-400000, -10500, 30000);
+    wave5.rotation.set(Math.PI/2, 0, Math.PI/2);
+    scene.add(wave5);
+
+    /////////////// SUN ///////////////////////////////
+
+    let sunGeo = new THREE.BoxGeometry(150000,1,180000);
+    let sunTxt = new THREE.TextureLoader().load('./img/sunwatercolor.png');
+   ////// txt repeat /////
+    // sunTxt.wrapS = THREE.RepeatWrapping;
+    // sunTxt.wrapT = THREE.RepeatWrapping;
+
+    // const RepeatsunHorizon = 2;
+    // const RepeatsunVert = 1;
+    // sunTxt.repeat.set(RepeatsunHorizon, RepeatsunVert);
+    // sunTxt.flipY = false;
+
+    let sunMaterial = new THREE.MeshBasicMaterial({ opacity: 100, transparent: true, depthWrite: false, map: sunTxt });
+    const sun = new THREE.Mesh( sunGeo, sunMaterial );
+    sun.position.set(-400000, 40500, -170000);
+    sun.rotation.set(Math.PI/2, 0, Math.PI/2);
+    scene.add(sun);
+
+
+    /////////// Boat ///////////////////////////////////
+
+    let boatGeo = new THREE.BoxGeometry(90000,1,90000);
+    let boatTxt = new THREE.TextureLoader().load('./img/boat.png');
+   ////// txt repeat /////
+    // boatTxt.wrapS = THREE.RepeatWrapping;
+    // boatTxt.wrapT = THREE.RepeatWrapping;
+
+    // const RepeatboatHorizon = 2;
+    // const RepeatboatVert = 1;
+    // boatTxt.repeat.set(RepeatboatHorizon, RepeatboatVert);
+    // boatTxt.flipY = false;
+
+    let boatMaterial = new THREE.MeshBasicMaterial({ opacity: 100, transparent: true, depthWrite: false, map: boatTxt });
+    const boat = new THREE.Mesh( boatGeo, boatMaterial );
+    boat.position.set(-260000, 4000, 130000);
+    boat.rotation.set(Math.PI/2, 0, Math.PI/2*3);
+    scene.add(boat);
 
 
 
@@ -458,11 +583,12 @@ function init() {
   scene.add(cube3);
   scene.add(cube4);
   animate();
-}
+
+};
 
 function animate() {
   renderer.render(scene, camera);
   // controls.update();
   requestAnimationFrame(animate);
-}
+};
 init();
