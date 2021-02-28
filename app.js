@@ -9,9 +9,10 @@
 
 
 
-let scene, camera, renderer, boat;
+let scene, camera, renderer, boat, wave1;
 var n = 1000;
 var m = 0;
+var w = 1000;
 
 function init() {
   const canvas = document.querySelector('#c'); // Skybox and outdoor scene // Later
@@ -59,6 +60,18 @@ function init() {
       MIDDLE: THREE.MOUSE.DOLLY,
       RIGHT: THREE.MOUSE.PAN,
     }
+
+    ///////// Load Manager //////////////////
+
+    const loadingManager = new THREE.LoadingManager( () => {
+
+      const loadingScreen = document.getElementById( 'loading-screen' );
+      loadingScreen.classList.add( 'fade-out' );
+
+      // optional: remove loader from DOM via event listener
+      loadingScreen.addEventListener( 'transitionend', onTransitionEnd );
+
+    } );
 
     ///////// Lighting ////////////////
 
@@ -122,7 +135,7 @@ function init() {
     scene.add(gltf.scene);
   });
 
-  benchLoader = new THREE.GLTFLoader();
+  benchLoader = new THREE.GLTFLoader( loadingManager );
   benchLoader.load('./img/models/bench/scene.gltf', function(gltf){
     bench = gltf.scene.children[0];
     bench.scale.set(9000,9000,9000);
@@ -206,7 +219,7 @@ function init() {
     // wave1Txt.flipY = false;
 
     let wave1Material = new THREE.MeshBasicMaterial({ opacity: 100, transparent: true, depthWrite: false, map: wave1Txt });
-    const wave1 = new THREE.Mesh( wave1Geo, wave1Material );
+    wave1 = new THREE.Mesh( wave1Geo, wave1Material );
     wave1.position.set(-190000, -15500, 30000);
     wave1.rotation.set(Math.PI/2, 0, Math.PI/2);
     scene.add(wave1);
@@ -582,13 +595,17 @@ function init() {
   scene.add(cube2);
   scene.add(cube3);
   scene.add(cube4);
+
+
+
+
   animate();
 
 };
 
 /////// Animate Boat ///////////////////////
 
-function anim(obj) {
+function animBoat(obj) {
   obj.position.z += n;
 
   if (obj.position.z >= -250000) {
@@ -601,11 +618,49 @@ function anim(obj) {
 
 }
 
+//////// ANimate Wave 1 ////////////////// -190000, -15500, 30000
+// function animWave1(obj) {
+// 	obj.position.z += w;
+//   // obj.position.y += m;
+
+//   if (obj.position.z >= -10000) {
+//     obj.position.z -= 100;
+//     w = 0;
+//     // m = 0;
+//   }
+//   if (obj.position.z <= 30000) {
+//     obj.position.z = 100;
+//     w = -10000;
+//     // m = 0;
+  // }
+  // if (obj.position.y >= -17000) {
+  //   obj.position.y -= 100;
+  //   // n = 0;
+  //   m = -17000;
+  // }
+  // if (obj.position.y === -17000) {
+  //   obj.position.y = -100;
+  //   // n = -16000;
+  //   m = -15500;
+  // }
+
+// }
+
+//////////////////////////////////////////
+
 function animate() {
   renderer.render(scene, camera);
   // controls.update();
   requestAnimationFrame(animate);
-  anim(boat);
+  animBoat(boat);
+  // animWave1(wave1);
 
 };
+function onTransitionEnd( event ) {
+
+	const element = event.target;
+	element.remove();
+
+};
+
 init();
