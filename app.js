@@ -510,7 +510,7 @@ function init() {
   let texture_up = new THREE.TextureLoader().load('./img/up1.png');
   let texture_dn = new THREE.TextureLoader().load('./img/down.png');
   let texture_rt = new THREE.TextureLoader().load('./img/right.png');
-  let texture_lf = new THREE.TextureLoader().load('./img/Hero.png');
+  let texture_lf = new THREE.TextureLoader(loadingManager).load('./img/Hero.png');
 
   materialArray1.push(new THREE.MeshPhongMaterial({ opacity: 0, transparent: true, depthWrite: false, map: texture_lf }));
   materialArray1.push(new THREE.MeshPhongMaterial({ opacity: 100, transparent: true, depthWrite: false, map: texture_bk }));
