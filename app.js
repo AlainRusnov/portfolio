@@ -9,7 +9,9 @@
 
 
 
-let scene, camera, renderer;
+let scene, camera, renderer, boat;
+var n = 1000;
+var m = 0;
 
 function init() {
   const canvas = document.querySelector('#c'); // Skybox and outdoor scene // Later
@@ -310,12 +312,10 @@ function init() {
     // boatTxt.flipY = false;
 
     let boatMaterial = new THREE.MeshBasicMaterial({ opacity: 100, transparent: true, depthWrite: false, map: boatTxt });
-    const boat = new THREE.Mesh( boatGeo, boatMaterial );
-    boat.position.set(-260000, 4000, 130000);
+    boat = new THREE.Mesh( boatGeo, boatMaterial );
+    boat.position.set(-260000, 4000, 250000);
     boat.rotation.set(Math.PI/2, 0, Math.PI/2*3);
     scene.add(boat);
-
-
 
   //////////// Wireframe Intersect Objects /////////////////////////////////////////////////
 
@@ -586,9 +586,41 @@ function init() {
 
 };
 
+/////// Animate Boat ///////////////////////
+
+function anim(obj) {
+  obj.position.z += n;
+  // obj.position.y += m;
+
+  if (obj.position.z > -250000) {
+    obj.position.z -= 100;
+    n = 0;
+    // m = 0.2;
+  }
+  // if (obj.position.z < 250000) {
+  //   obj.position.z = 100;
+  //   n = 100;
+  //   // m = -0.2;
+  // }
+  // if (obj.position.y > 10) {
+  //   obj.position.y -= 0.2;
+  //   n = -0.2;
+  //   m = 0;
+  // }
+  // if (obj.position.y < -10) {
+  //   obj.position.y = -10;
+  //   n = 0.2;
+  //   m = 0;
+  // }
+
+}
+
 function animate() {
   renderer.render(scene, camera);
   // controls.update();
   requestAnimationFrame(animate);
+  // console.log(cube1);
+  anim(boat);
+
 };
 init();
