@@ -138,7 +138,8 @@ p {
 	left: 0;
 	width: 100%;
 	height: 100%;
-	background-color: #000000;
+	background: radial-gradient(whitesmoke, rgb(115, 116, 117));
+	/* background-image: url("./img/load.png"); */
 	opacity: 1;
  	transition: 1s opacity;
 }
@@ -157,7 +158,7 @@ p {
     margin: -75px 0 0 -75px;
     border-radius: 50%;
     border: 3px solid transparent;
-    border-top-color: #9370DB;
+    border-top-color: #355d68;
     -webkit-animation: spin 2s linear infinite;
     animation: spin 2s linear infinite;
 }
@@ -170,7 +171,7 @@ p {
     bottom: 5px;
     border-radius: 50%;
     border: 3px solid transparent;
-    border-top-color: #BA55D3;
+    border-top-color: #4081a0;
     -webkit-animation: spin 3s linear infinite;
     animation: spin 3s linear infinite;
 }
@@ -183,7 +184,7 @@ p {
     bottom: 15px;
     border-radius: 50%;
     border: 3px solid transparent;
-    border-top-color: #FF00FF;
+    border-top-color: #3fe9f8;
     -webkit-animation: spin 1.5s linear infinite;
     animation: spin 1.5s linear infinite;
 }
@@ -214,7 +215,8 @@ p {
 
 h2 {
 	text-align: center;
-	font-size: large;
+	font-size: x-large;
+	color: black;
 	/* color: aqua; */
 	/* justify-content: end; */
 }
