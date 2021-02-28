@@ -1,3 +1,8 @@
+// 0.7 // Outdoor layout added - animation next
+
+![Screenshot (295)](https://user-images.githubusercontent.com/71734708/109377502-e1e2d200-7899-11eb-9858-bd3cfe806586.png)
+
+
 // V 0.6 // Added vertex overlay for Raytracing object Intersection - modal project info displaying ( to do: implement API to populate ) - site "functional"
 
 ![Screenshot (276)](https://user-images.githubusercontent.com/71734708/108891740-11b18180-75dd-11eb-9ef3-82228b8c8801.png)
