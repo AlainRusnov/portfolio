@@ -157,10 +157,11 @@ p {
     height: 150px;
     margin: -75px 0 0 -75px;
     border-radius: 50%;
-    border: 3px solid transparent;
+    border: 10px solid transparent;
     border-top-color: #355d68;
     -webkit-animation: spin 2s linear infinite;
     animation: spin 2s linear infinite;
+
 }
 #loader:before {
     content: "";
@@ -170,7 +171,7 @@ p {
     right: 5px;
     bottom: 5px;
     border-radius: 50%;
-    border: 3px solid transparent;
+    border: 10px solid transparent;
     border-top-color: #4081a0;
     -webkit-animation: spin 3s linear infinite;
     animation: spin 3s linear infinite;
@@ -183,7 +184,7 @@ p {
     right: 15px;
     bottom: 15px;
     border-radius: 50%;
-    border: 3px solid transparent;
+    border: 10px solid transparent;
     border-top-color: #3fe9f8;
     -webkit-animation: spin 1.5s linear infinite;
     animation: spin 1.5s linear infinite;
