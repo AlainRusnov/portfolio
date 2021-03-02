@@ -53,6 +53,7 @@ function init() {
 
     controls.keyPanSpeed = 60; // Keyboard move speed ( janky )
     controls.panSpeed = 13;
+    controls.enableZoom = false;
 
     // Reassign controls ( review for mobile )
     controls.mouseButtons = {
