@@ -53,7 +53,7 @@ function handleImages(){
     txt.needsUpdate = true;
     let geo = new THREE.PlaneBufferGeometry(1.2,0.8,20,20);
     let mesh = new THREE.Mesh(geo,mat);
-    mesh.position.y = i*0.5;
+    mesh.position.y = i*1;
     group.rotation.y = -0.3;
     group.rotation.x = -0.2;
     group.rotation.z = -0.2;
@@ -85,7 +85,7 @@ function roll(){
     o.dist = 1 - o.dist**2;
     elems[i].style.transform = `scale(${1 + 0.4 * o.dist})`;
     let scale = 1 + 0.2 * o.dist;
-    meshes[i].position.y = i*1.2 - position*1.2;
+    meshes[i].position.y = i*-1.2 + position*1.2;
     meshes[i].scale.set(scale,scale,scale);
   });
 
