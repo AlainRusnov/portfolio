@@ -8,11 +8,24 @@
     body {
       overflow: hidden;
     }
-    .n{display: flex; align-items:center;z-index: 1;position: absolute; top: 100px; width: 300px; height: 50px; background: rgb(255, 255, 255);}
-    .n1{top: 200px; background: rgb(231, 99, 11);}
-    .n2{top: 300px; background: rgb(165, 164, 164);}
-    .n3{top: 400px; background: rgb(231, 78, 198);}
-    .n4{top: 500px; background: rgb(61, 214, 241);}
+    .n{
+      display: flex;
+      justify-content:
+      space-evenly;
+      z-index: 1;
+      position: absolute;
+      top: 100px;
+      width: 300px;
+      height: 50px;
+      background: rgba(2, 2, 2, 0.30);
+      border-radius: 4px;
+      /* backdrop-filter: blur(50px);
+      -webkit-backdrop-filter: blur(50px); */
+    }
+    .n1{display: flex; justify-content:space-evenly;z-index: 1; position: absolute; top: 200px; background: rgba(231, 99, 11, 0.4);}
+    .n2{display: flex; justify-content:space-evenly;position: absolute; top: 300px; background: rgba(165, 164, 164, 0.4);}
+    .n3{display: flex; justify-content:space-evenly;position: absolute;top: 400px; background: rgba(231, 78, 198, 0.4);}
+    .n4{display: flex; justify-content:space-evenly;position: absolute;top: 500px; background: rgba(61, 214, 241, 0.4);}
     #block{
       height: 50px;
       width: 50px;
@@ -30,7 +43,7 @@
       left: 0;
       z-index: -100;
       /* pointer-events: none; */
-      background: white;
+      background: linear-gradient(whitesmoke, rgba(255, 255, 255, 0.5));
     }
     ul {
       width: 3vw;
@@ -42,23 +55,36 @@
       list-style: none;
       margin: 2vw;
       padding: 0;
+      border-radius: 3px;
     }
     li {
       font-size: 25px;
       height: 4vh;
-      border: 1px solid black;
-      background-color:  rgb(52, 108, 160);
+      border: 1px solid rgb(0, 0, 0, 0.5);
+      background-color:  rgb(52, 108, 160, 0.4);
+      border-radius: 3px;
     }
     li:hover{
       background-color: rgb(241, 241, 241);
+      border: 2px solid rgb(50, 20, 220, 0.6);
     }
     .nav{
       top: 10vh;
       margin-right: 3vw;
     }
+    #portfolio{
+      display: flex;
+      justify-content: flex-end;
+      text-align: right;
+      margin-right: 2vw;
+
+    }
   </style>
 </head>
 <body>
+  <div id="portfolio">
+    <h2>Alain Rusnov </br>portfolio</h2>
+  </div>
   <ul class="nav">
   <li data-nav="0"></li>
   <li data-nav="1"></li>
@@ -68,22 +94,23 @@
   </ul>
   <div id="wrap">
     <div class="n">
-      <img class="image-scroll" src="./img/Hero.png" width="60" alt="">
-      Hero</div>
-    <div class="n n1">
-      <img class="image-scroll" src="./img/stuud.png" width="60" alt="">
-      Stuud</div>
+      <img class="image-scroll" src="./img/Herox.png" width="60" alt="">
+      <a href="https://alainrusnov.github.io/portfolio/"target="_blank" rel="noopener"><h3>Portfolio gallery</h3></a></div>
+      <div class="n n1">
+      <img class="image-scroll" src="./img/stuudx.png" width="60" alt="">
+      <a href="http://www.stuud.app" target="_blank" rel="noopener"><h3>www.Stuud.app</h3></a></div>
     <div class="n n2">
-      <img class="image-scroll" src="./img/gbbank.png" width="60" alt="">
-      Bank</div>
+      <img class="image-scroll" src="./img/gbbankx.png" width="60" alt="">
+      <a href="https://alainrusnov.github.io/GumBall-Bank/" target="_blank" rel="noopener"><h3>GumballBank</h3></a></div>
     <div class="n n3">
-      <img class="image-scroll" src="./img/gblogo.png" width="60" alt="">
-      Viewer</div>
+      <img class="image-scroll" src="./img/gblogox.png" width="60" alt="">
+      <a href="https://ghost-dev-28501.web.app/" target="_blank" rel="noopener"><h3>Viewer</h3></a></div>
     <div class="n n4">
-      <img class="image-scroll" src="./img/dawg.png" width="60" alt="">
-      Dawg</div>
+      <img class="image-scroll" src="./img/dawgx.png" width="60" alt="">
+      <a href="https://dawg-lewagon.herokuapp.com/" target="_blank" rel="noopener"><h3>Dawg</h3></a>
+    </div>
   </div>
-  <!-- <div id='block'></div> -->
+  <!-- <div id="block"></div> -->
   <div id="container"></div>
   <script src='https://unpkg.com/three/build/three.min.js'></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.0/gsap.min.js" integrity="sha512-1dalHDkG9EtcOmCnoCjiwQ/HEB5SDNqw8d4G2MKoNwjiwMNeBAkudsBCmSlMnXdsH8Bm0mOd3tl/6nL5y0bMaQ==" crossorigin="anonymous"></script>"
