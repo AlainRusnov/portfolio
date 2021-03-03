@@ -15,7 +15,7 @@ let attractMode = false;
 let attractTo = 0;
 let camera, scene, renderer;
 let geometry, material, mesh;
-let bkground = [0xffff, 0xF800, 0x7FF, 0x1F, 0xF81F];
+let bkground = [0xff, 0xffff, 0x000, 0xffffff, 0x000ff];
 
 init();
 
@@ -35,7 +35,7 @@ function init() {
 
   renderer = new THREE.WebGLRenderer( { antialias: true, alpha: true } );
   renderer.setSize( window.innerWidth, window.innerHeight );
-  renderer.setClearColor(0xFFFFFF);
+  renderer.setClearColor(0xFFFFFF, 0);
   // renderer.setAnimationLoop( animation );
   container.appendChild( renderer.domElement );
 
@@ -64,8 +64,8 @@ function handleImages(){
     group.rotation.x = -0.2;
     group.rotation.z = -0.2;
 
-    renderer.setClearColor(0xffffff);
-    console.log(bkground[i]);
+    // renderer.setClearColor(0xffffff, 0);
+    // console.log(bkground[i]);
 
     group.add(mesh);
     groups.push(group);
@@ -93,6 +93,7 @@ function roll(){
     o.dist = Math.min(Math.abs(position - i),1);
     o.dist = 1 - o.dist**2;
     elems[i].style.transform = `scale(${1 + 0.8 * o.dist})`;
+    container.style.transform = `background: ${bkground[i]};`
     let scale = 1 + 0.3 * o.dist;
     meshes[i].position.y = i*-1.1 + position*1.1;
     meshes[i].scale.set(scale,scale,scale);

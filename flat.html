@@ -6,7 +6,7 @@
   <title>Portfolio</title>
   <style>
     body {
-      overflow: visible;
+      overflow: hidden;
     }
     .n{display: flex; align-items:center;z-index: 1;position: absolute; top: 100px; width: 300px; height: 50px; background: rgb(255, 255, 255);}
     .n1{top: 200px; background: rgb(231, 99, 11);}
@@ -19,6 +19,8 @@
       position: absolute;
       background: red;
       z-index: 1;
+      /* visibility: hidden; */
+      display: none;
     }
     #container{
       width: 100vw;
@@ -27,7 +29,7 @@
       top: 0;
       left: 0;
       z-index: -100;
-      pointer-events: none;
+      /* pointer-events: none; */
       background: white;
     }
     ul {
@@ -81,7 +83,7 @@
       <img class="image-scroll" src="./img/dawg.png" width="60" alt="">
       Dawg</div>
   </div>
-  <div id='block'></div>
+  <!-- <div id='block'></div> -->
   <div id="container"></div>
   <script src='https://unpkg.com/three/build/three.min.js'></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.0/gsap.min.js" integrity="sha512-1dalHDkG9EtcOmCnoCjiwQ/HEB5SDNqw8d4G2MKoNwjiwMNeBAkudsBCmSlMnXdsH8Bm0mOd3tl/6nL5y0bMaQ==" crossorigin="anonymous"></script>"
