@@ -6,16 +6,16 @@
   <title>Portfolio</title>
   <style>
     body {
-      overflow: hidden;
+      overflow: visible;
     }
-    .n{z-index: 1;position: absolute; top: 100px; width: 200px; height: 10px; background: #000;}
-    .n1{top: 200px;}
-    .n2{top: 300px;}
-    .n3{top: 400px;}
-    .n4{top: 500px;}
+    .n{display: flex; align-items:center;z-index: 1;position: absolute; top: 100px; width: 300px; height: 50px; background: rgb(255, 255, 255);}
+    .n1{top: 200px; background: rgb(231, 99, 11);}
+    .n2{top: 300px; background: rgb(165, 164, 164);}
+    .n3{top: 400px; background: rgb(231, 78, 198);}
+    .n4{top: 500px; background: rgb(61, 214, 241);}
     #block{
-      height: 100px;
-      width: 100px;
+      height: 50px;
+      width: 50px;
       position: absolute;
       background: red;
       z-index: 1;
@@ -31,29 +31,38 @@
       background: white;
     }
     ul {
-      width: 100px;
+      width: 3vw;
       position: fixed;
       top: 0;
       right: 0;
       z-index: 100;
-      border: 1px solid black;
+      /* border: 1px solid black; */
       list-style: none;
-      margin: 0;
+      margin: 2vw;
       padding: 0;
     }
     li {
       font-size: 25px;
+      height: 4vh;
       border: 1px solid black;
+      background-color:  rgb(52, 108, 160);
+    }
+    li:hover{
+      background-color: rgb(241, 241, 241);
+    }
+    .nav{
+      top: 10vh;
+      margin-right: 3vw;
     }
   </style>
 </head>
 <body>
   <ul class="nav">
-  <li data-nav="0">Hero</li>
-  <li data-nav="1">Stuud</li>
-  <li data-nav="2">Bank</li>
-  <li data-nav="3">Viewer</li>
-  <li data-nav="4">Dawg</li>
+  <li data-nav="0"></li>
+  <li data-nav="1"></li>
+  <li data-nav="2"></li>
+  <li data-nav="3"></li>
+  <li data-nav="4"></li>
   </ul>
   <div id="wrap">
     <div class="n">

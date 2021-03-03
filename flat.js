@@ -15,6 +15,7 @@ let attractMode = false;
 let attractTo = 0;
 let camera, scene, renderer;
 let geometry, material, mesh;
+let bkground = [0xffff, 0xF800, 0x7FF, 0x1F, 0xF81F];
 
 init();
 
@@ -32,7 +33,7 @@ function init() {
   // mesh = new THREE.Mesh( geometry, material );
   // scene.add( mesh );
 
-  renderer = new THREE.WebGLRenderer( { antialias: true } );
+  renderer = new THREE.WebGLRenderer( { antialias: true, alpha: true } );
   renderer.setSize( window.innerWidth, window.innerHeight );
   renderer.setClearColor(0xFFFFFF);
   // renderer.setAnimationLoop( animation );
@@ -52,13 +53,20 @@ function handleImages(){
     // console.log(imgSliders);
     let txt = new THREE.TextureLoader().load(`img/${imgSliders}`);
     let mat = new THREE.MeshBasicMaterial({ map: txt }); // wireframe: true
-    txt.needsUpdate = true;
+    // txt.needsUpdate = true;
     let geo = new THREE.PlaneBufferGeometry(1.1,0.8,20,20);
     let mesh = new THREE.Mesh(geo,mat);
+
     mesh.position.y = i*1.2;
+    console.log(mesh);
+
     group.rotation.y = -0.3;
     group.rotation.x = -0.2;
     group.rotation.z = -0.2;
+
+    renderer.setClearColor(0xffffff);
+    console.log(bkground[i]);
+
     group.add(mesh);
     groups.push(group);
     scene.add(group);
@@ -76,7 +84,6 @@ window.addEventListener('wheel',(e)=>{
 
 let objs = Array(5).fill({dist:0});
 
-
 function roll(){
   // console.log(speed);
   position += speed;
@@ -85,7 +92,7 @@ function roll(){
   objs.forEach((o,i)=> {
     o.dist = Math.min(Math.abs(position - i),1);
     o.dist = 1 - o.dist**2;
-    elems[i].style.transform = `scale(${1 + 0.4 * o.dist})`;
+    elems[i].style.transform = `scale(${1 + 0.8 * o.dist})`;
     let scale = 1 + 0.3 * o.dist;
     meshes[i].position.y = i*-1.1 + position*1.1;
     meshes[i].scale.set(scale,scale,scale);
