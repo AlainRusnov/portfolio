@@ -11,6 +11,8 @@ let elems = [...document.querySelectorAll('.n')];
 let container = document.getElementById("container");
 const meshes = [];
 let groups = [];
+let attractMode = false;
+let attractTo = 0;
 let camera, scene, renderer;
 let geometry, material, mesh;
 
@@ -51,9 +53,9 @@ function handleImages(){
     let txt = new THREE.TextureLoader().load(`img/${imgSliders}`);
     let mat = new THREE.MeshBasicMaterial({ map: txt }); // wireframe: true
     txt.needsUpdate = true;
-    let geo = new THREE.PlaneBufferGeometry(1.2,0.8,20,20);
+    let geo = new THREE.PlaneBufferGeometry(1.1,0.8,20,20);
     let mesh = new THREE.Mesh(geo,mat);
-    mesh.position.y = i*1;
+    mesh.position.y = i*1.2;
     group.rotation.y = -0.3;
     group.rotation.x = -0.2;
     group.rotation.z = -0.2;
@@ -84,19 +86,24 @@ function roll(){
     o.dist = Math.min(Math.abs(position - i),1);
     o.dist = 1 - o.dist**2;
     elems[i].style.transform = `scale(${1 + 0.4 * o.dist})`;
-    let scale = 1 + 0.2 * o.dist;
-    meshes[i].position.y = i*-1.2 + position*1.2;
+    let scale = 1 + 0.3 * o.dist;
+    meshes[i].position.y = i*-1.1 + position*1.1;
     meshes[i].scale.set(scale,scale,scale);
   });
 
   rounded = Math.round(position);
 
   let diff = (rounded - position);
+  if(attractMode) {
+    position += (position - attractTo)*-0.02;
+  } else {
+    position += Math.sign(diff)*Math.pow(Math.abs(diff),0.7) * 0.02; // inertia
 
-  position += Math.sign(diff)*Math.pow(Math.abs(diff),0.7) * 0.02; // inertia
+    // console.log(position);
+    wrap.style.transform = `translate(0,${-position*100 + 50}px`;
 
-  // console.log(position);
-  wrap.style.transform = `translate(0,${-position*100 + 50}px`;
+  }
+
   // meshes.forEach((mesh,i)=>{
   //   mesh.position.y = i*1.2 + position*1.2;
   //   mesh.scale.set(i*1.2 + position*1.2)
@@ -117,3 +124,38 @@ function animate() {
   requestAnimationFrame(animate);
 
 }
+
+let rots = groups.map(e=>e.rotation)
+
+let navs = [...document.querySelectorAll("li")];
+let nav = document.querySelector('.nav');
+nav.addEventListener('mouseenter',()=>{
+  attractMode = true;
+  gsap.to(rots,{
+    duration: 0.3,
+    x:-0.4,
+    y:0,
+    z:0
+  })
+});
+
+nav.addEventListener('mouseleave',()=>{
+  attractMode = false;
+  gsap.to(rots,{
+    duration: 0.3,
+    x:-0.2,
+    y:-0.3,
+    z:-0.2
+  })
+});
+
+navs.forEach(el=>{
+  el.addEventListener('mouseover',(e)=>{
+    attractTo = Number(e.target.getAttribute('data-nav'));
+    console.log(attractTo);
+  })
+});
+
+
+
+

@@ -30,9 +30,31 @@
       pointer-events: none;
       background: white;
     }
+    ul {
+      width: 100px;
+      position: fixed;
+      top: 0;
+      right: 0;
+      z-index: 100;
+      border: 1px solid black;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    li {
+      font-size: 25px;
+      border: 1px solid black;
+    }
   </style>
 </head>
 <body>
+  <ul class="nav">
+  <li data-nav="0">Hero</li>
+  <li data-nav="1">Stuud</li>
+  <li data-nav="2">Bank</li>
+  <li data-nav="3">Viewer</li>
+  <li data-nav="4">Dawg</li>
+  </ul>
   <div id="wrap">
     <div class="n">
       <img class="image-scroll" src="./img/Hero.png" width="60" alt="">
@@ -53,6 +75,7 @@
   <div id='block'></div>
   <div id="container"></div>
   <script src='https://unpkg.com/three/build/three.min.js'></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.0/gsap.min.js" integrity="sha512-1dalHDkG9EtcOmCnoCjiwQ/HEB5SDNqw8d4G2MKoNwjiwMNeBAkudsBCmSlMnXdsH8Bm0mOd3tl/6nL5y0bMaQ==" crossorigin="anonymous"></script>"
   <script src="flat.js"></script>
 </body>
 </html>
