@@ -7,12 +7,12 @@ body {
   display: flex;
   height: 100vh;
   margin-left: 6vh;
-  margin-bottom: 6vh;
-  position: absolute;
+  margin-bottom: 20vh;
+  /* position: absolute; */
   top: 0px;
   justify-content: space-between;
   flex-direction: column;
-  scroll-snap-type: block;
+  /* scroll-snap-type: block; */
   /* bottom: 200px; */
   /* backdrop-filter: blur( 10.0px );
   -webkit-backdrop-filter: blur( 10.0px ); */
@@ -22,14 +22,15 @@ body {
   justify-content: space-evenly;
   align-items: center;
   text-align: left;
-  scroll-snap-align: center;
+  /* scroll-snap-align: center; */
   /* flex-direction: column; */
   z-index: 1;
-  /* margin: 20vh;
+  margin-top: 10vh;
+  margin-bottom: 20vh;
   /* position: auto; */
   /* flex: 1; */
   /* top: 0px; */
-  width: 350px;
+  width: 325px;
   height: 50px;
   /* background: rgb(250, 250, 250, 0.9);
   border-radius: 4px;
@@ -54,8 +55,9 @@ body {
    /* flex: 2; */
   /* position: inherit; */
   /* top: 200px; */
-  /* margin: 10vh; */
-  background: rgba(231, 99, 11, 0.4);
+  margin-bottom: 20vh;
+  margin-top: 25vh;
+  background: rgba(231, 99, 11, 0.2);
   /* -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px); */
 }
@@ -63,25 +65,28 @@ body {
   /* display: flex;
   justify-content:space-evenly; */
   /* position: relative; */
-  /* margin: 10vh; */
+  margin-bottom: 20vh;
+  margin-top: 25vh;
   /* top: 300px; */
-  background:  rgba(165, 164, 164, 0.4);
+  background:  rgba(165, 164, 164, 0.2);
 }
 .n3{
   /* display: flex;
   justify-content:space-evenly; */
   /* position: relative; */
-  /* margin: 10vh; */
+  margin-bottom: 10vh;
+  margin-top: 25vh;
   /* top: 400px; */
-  background:  rgba(231, 78, 198, 0.4);
+  background:  rgba(231, 78, 198, 0.2);
 }
 .n4{
   /* display: flex;
    justify-content:space-evenly; */
    /* position: relative; */
-   /* margin-bottom: 10vh; */
+   margin-bottom: 10vh;
+   margin-top: 35vh;
    /* top: 500px; */
-   background:  rgba(61, 214, 241, 0.4);
+   background:  rgba(61, 214, 241, 0.2);
   }
 #block{
   height: 50px;
@@ -101,7 +106,7 @@ body {
   left: 0;
   z-index: -100;
   /* pointer-events: none; */
-  background: linear-gradient(rgba(255, 255, 255, 0.856), rgb(3, 3, 3));
+  background: linear-gradient(rgba(255, 255, 255, 0.856), rgb(218, 218, 218));
 }
 ul {
   width: 3vw;

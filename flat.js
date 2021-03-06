@@ -176,7 +176,7 @@ function roll(){
     position += Math.sign(diff)*Math.pow(Math.abs(diff),0.7) * 0.02; // inertia
 
     // console.log(position);
-    wrap.style.transform = `translate(0,${-position*100 + 50}px`;
+    wrap.style.transform =  `translate(0,${-position * 100/2}%)`                             //`translate(0,${-position*100 + 50}px`;
 
   }
 
