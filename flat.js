@@ -121,10 +121,11 @@ function handleImages(){
     // let mat = new THREE.MeshBasicMaterial({ map: txt }); // wireframe: true
     // txt.needsUpdate = true;
 
-    let geo = new THREE.PlaneBufferGeometry(1.3,0.9,40,40);
+    let geo = new THREE.PlaneBufferGeometry(1.2,0.9,40,40);
     let mesh = new THREE.Mesh(geo,mat);
 
     mesh.position.y = i*1.2;
+    mesh.position.x = 0.3;
     // console.log(mesh);
 
     group.rotation.y = -0.3;
@@ -160,6 +161,7 @@ function roll(){
     o.dist = Math.min(Math.abs(position - i),1);
     o.dist = 1 - o.dist**2;
     elems[i].style.transform = `scale(${1 + 0.8 * o.dist})`;
+    elems[i].style.transform === "scale(1)" ? elems[i].style.visibility = "hidden" : elems[i].style.visibility = "visible";
     // container.style.transform = `background: ${bkground[i]};`
     let scale = 1 + 0.10 * o.dist;
     meshes[i].position.y = i*-1.1 + position*1.1;
