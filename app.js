@@ -1,6 +1,6 @@
 /////////////////////////////////////////////////////
 // Alain Rusnov Portfolio --
-// V 0.6
+// V 0.8
 /////////////////////////////////////////////////////
 
 // import { OrbitControls } from "https://threejs.org/examples/jsm/controls/OrbitControls.js";
@@ -10,6 +10,7 @@
 
 
 let scene, camera, renderer, boat, wave1;
+// let keyboard = {};
 var n = 1000;
 var m = 0;
 var w = 1000;
@@ -54,6 +55,35 @@ function init() {
     controls.keyPanSpeed = 60; // Keyboard move speed ( janky )
     controls.panSpeed = 13;
     controls.enableZoom = false;
+
+    window.addEventListener('keydown', function (event) {
+      switch (event.keyCode) {
+          case 65:
+            // console.log(controls.keys.LEFT);
+            // console.log(controls.object);
+              controls.object.rotation.y -= Math.PI / 2 * 0.01;
+              // controls.update();
+              break;
+          case 68:
+            console.log("RIGHT");
+            controls.object.rotation.y += Math.PI / 2 * 0.01;
+            // controls.update();
+              // controls.ROTATE.y += Math.PI / 2 * 0.01;
+              break;
+          case 37:
+            console.log("LEFT");
+              // controls.object.rotate.x = Math.PI / 2 * 0.01;
+              break;
+          case 39:
+            console.log("RIGHT");
+              // controls.object.rotate.x = Math.PI / 2 * 0.01;
+              break;
+          case "s":
+              transformControls.setMode("scale")
+              break
+      }
+  });
+
 
     // Reassign controls ( review for mobile )
     controls.mouseButtons = {
@@ -597,7 +627,7 @@ function init() {
   scene.add(cube3);
   scene.add(cube4);
 
-
+  controls.update();
 
 
   animate();
