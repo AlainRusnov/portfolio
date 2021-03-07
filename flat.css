@@ -1,3 +1,22 @@
+@font-face {
+  font-family: 'squarefont';
+  src:url('./fonts/Square.ttf') format('ttf'),
+      url('./fonts/Squareo.ttf') format('ttf');
+  font-weight: normal;
+  font-style: normal;
+
+}
+
+@font-face {
+  font-family: 'neon_80sregular';
+  src: url('./fonts/neon-webfont.woff2') format('woff2'),
+       url('./fonts/neon-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+
+}
+
+
 body {
   overflow: hidden;
   display: flex;
@@ -5,30 +24,31 @@ body {
   background-image: url('./img/blackbrick.jpg');
 }
 #wrap{
-  display: flex;
+  /* display: flex; */
   height: 100vh;
   margin-left: 10vh;
   margin-bottom: 20vh;
   /* position: absolute; */
   top: 0px;
-  justify-content: space-between;
-  flex-direction: column;
+  /* justify-content: space-between;
+  flex-direction: column; */
   /* scroll-snap-type: block; */
   /* bottom: 200px; */
   /* backdrop-filter: blur( 10.0px );
   -webkit-backdrop-filter: blur( 10.0px ); */
-  transition: hidden 0.2s;
+  /* transition: all 0.2s; */
 }
 .n{
   /* display: flex; */
-  /* justify-content: space-evenly; */
+  /* justify-content: left; */
   /* align-items: center; */
-  text-align: center;
+  text-align: left;
   /* scroll-snap-align: center; */
-  /* flex-direction: column; */
+  flex-direction: column;
   z-index: 1;
-  margin-top: 10vh;
-  margin-bottom: 20vh;
+  margin-top: 7em;
+  margin-bottom: 10em;
+  margin-left: 5em;
   /* position: auto; */
   /* flex: 1; */
   /* top: 0px; */
@@ -44,10 +64,10 @@ body {
 	/* user-select: auto; */
 	/* pointer-events: none; */
 	/* z-index: ; */
-	background: rgba(246, 246, 246, 0.2);
+	/* background: rgba(246, 246, 246, 0.1); */
   /* box-shadow: 0 8px 32px 0 rgba(255, 255, 255, 0.1); */
-  backdrop-filter: blur( 5.0px );
-  -webkit-backdrop-filter: blur( 5.0px );
+  backdrop-filter: blur( 1.0px );
+  -webkit-backdrop-filter: blur( 1.0px );
   border-radius: 4px;
 }
 .n1{
@@ -57,9 +77,9 @@ body {
    /* flex: 2; */
   /* position: inherit; */
   /* top: 200px; */
-  margin-bottom: 20vh;
-  margin-top: 20vh;
-  background: rgba(231, 99, 11, 0.2);
+  margin-bottom: 10em;
+  margin-top: 10em;
+  /* background: rgba(231, 99, 11, 0.2); */
   /* -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px); */
 }
@@ -67,28 +87,28 @@ body {
   /* display: flex;
   justify-content:space-evenly; */
   /* position: relative; */
-  margin-bottom: 20vh;
-  margin-top: 5vh;
+  margin-bottom: 10em;
+  margin-top: 15em;
   /* top: 300px; */
-  background:  rgba(165, 164, 164, 0.2);
+  /* background:  rgba(165, 164, 164, 0.2); */
 }
 .n3{
   /* display: flex;
   justify-content:space-evenly; */
   /* position: relative; */
-  margin-bottom: 10vh;
-  margin-top: 5vh;
+  margin-bottom: 10em;
+  margin-top: 5em;
   /* top: 400px; */
-  background:  rgba(231, 78, 198, 0.2);
+  /* background:  rgba(231, 78, 198, 0.2); */
 }
 .n4{
   /* display: flex;
    justify-content:space-evenly; */
    /* position: relative; */
-   margin-bottom: 10vh;
-   margin-top: 25vh;
+   margin-bottom: 10em;
+   margin-top: 15em;
    /* top: 500px; */
-   background:  rgba(61, 214, 241, 0.2);
+   /* background:  rgba(61, 214, 241, 0.2); */
   }
 #block{
   height: 50px;
@@ -147,4 +167,22 @@ li:hover{
   text-align: right;
   margin-right: 2vw;
 
+}
+
+p {
+  font-family: 'Ubuntu', sans-serif;
+  font-size: 16px;
+  /* line-height: 0px; */
+  margin-top:-10px;
+}
+
+h2 {
+  font-size: 24px;
+  color: #fff;
+    text-shadow: 1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000;
+}
+
+a {
+  color: #fff;
+    text-shadow: 1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000;
 }

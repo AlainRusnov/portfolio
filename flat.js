@@ -161,7 +161,7 @@ function handleImages(){
     // let mat = new THREE.MeshBasicMaterial({ map: txt }); // wireframe: true
     // txt.needsUpdate = true;
 
-    let geo = new THREE.PlaneBufferGeometry(1.2,0.9,40,40);
+    let geo = new THREE.PlaneBufferGeometry(1.25,0.9,40,40);
     let mesh = new THREE.Mesh(geo,mat);
 
     mesh.position.y = i*1.2;
