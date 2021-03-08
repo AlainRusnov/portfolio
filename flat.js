@@ -115,30 +115,39 @@ function init() {
 
    // LIGHTS
    pointLight = new THREE.PointLight(0xFFFFFF, 1.0, 1500);
-   pointLight.position.x = 0;
+   pointLight.position.x = 1;
    pointLight.position.y = 0;
-   pointLight.position.z = 1500;
+   pointLight.position.z = 3;
    scene.add(pointLight);
 
-  //  geoRec = new THREE.BoxBufferGeometry( 1000, 500, 500 );
+  //  shadow = new THREE.LightShadow( camera );
+  //  scene.add(shadow);
+
+  // Text //
 
 
-  //   var box;
-  //   var color;
-  //   for (var i = 0; i < nbmesh; i++) {
-  //     color = new THREE.Color( 0xffffff );
-  //     color.setRGB( 255, 255, 255 );
 
-  //     matBox = new THREE.MeshPhongMaterial( { color:color, wireframe: false } );
+   // Cylinder
 
-  //     obj['box'+i] = new THREE.Mesh( geoRec, matBox );
+   geoRec = new THREE.CylinderBufferGeometry( 0.70, 0.70, 6, 64 );
 
-  //     scene.add( obj['box'+i] );
-  //     box = obj['box' + i];
 
-  //     box.position.x = (( -W* 2) * Math.random()) + W;
-  //     box.position.y = (( -H* 4) * Math.random()) + H;
-  //     box.position.z = (( -H *4) * Math.random()) + H;
+  let box;
+      color = new THREE.Color( 0xffffff );
+      color.setRGB( 255, 255, 255 );
+
+      matBox = new THREE.MeshPhongMaterial( { color: color, depthwrite: false, wireframe: false } );
+
+      box = new THREE.Mesh( geoRec, matBox );
+      scene.add(box);
+
+      box.position.x = 1;
+      box.position.y = 1;
+      box.position.z = -1;
+
+      box.rotation.y = -0.3;
+      box.rotation.x = -0.2;
+      box.rotation.z = -0.2;
   //   }
 
   animate();
@@ -246,12 +255,7 @@ function animate() {
 	// mesh.rotation.x = time / 2000;
 	// mesh.rotation.y = time / 1000;
 
-  // for ( var i = 0; i < nbmesh; i++ ) {
-  //   var box = obj['box'+i];
-  //   box.rotation.x += ((W * .5) ) * .0000005;
-  //   box.rotation.y += ((H * .5) - mouseX) * .0000005;
-  //   box.position.z  = ((H * .5) - mouseY) * 1.0;
-  // }
+
 
   pointLight.distance = (mouseY * 2) +2000;
   // camera.position.y = (mouseY * 0.5);
@@ -298,100 +302,3 @@ navs.forEach(el=>{
 
 
 
-// function Background(){
-//   var self = this;
-//   var W, H;
-//   var camera, scene, renderer;
-//   var geoback, matBox
-//   var pointLight;
-//   var obj = {};
-//   var mouseX = 0;
-//   var mouseY = 0;
-//   var nbmesh = 100;
-
-
-//   this.init = function(){
-//     // SET
-//     scene = new THREE.Scene();
-//     W = window.innerWidth
-//     H = window.innerHeight
-
-    // LIGHTS
-    // pointLight = new THREE.PointLight(0xFFFFFF, 1.5, 1000);
-	  // pointLight.position.x = 0;
-		// pointLight.position.y = 0;
-		// pointLight.position.z = 100;
-		// scene.add(pointLight);
-
-    // CAMERA
-    // camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 1, 10000 );
-    // camera.position.z = 1000;
-
-    // CAST
-    // geoback = new THREE.BoxGeometry( 600, 200, 200 );
-
-
-    // var box;
-    // var color;
-    // for (var i = 0; i < nbmesh; i++) {
-    //   color = new THREE.Color( 0xffffff );
-    //   color.setRGB( 255, 255, 255 );
-
-    //   matBox = new THREE.MeshPhongMaterial( { color:color, wireframe: false } );
-
-    //   obj['box'+i] = new THREE.Mesh( geoback, matBox );
-
-    //   scene.add( obj['box'+i] );
-    //   box = obj['box' + i];
-
-    //   box.position.x = ((- W* 2) * Math.random()) + W;
-    //   box.position.y = ((- H* 4) * Math.random()) + H;
-    //   box.position.z = ((- H *4) * Math.random()) + H;
-    // }
-
-    // ACTION
-    // renderer = new THREE.WebGLRenderer();
-    // renderer.setSize( window.innerWidth, window.innerHeight );
-    // document.getElementById('container').appendChild( renderer.domElement );
-
-  //   window.addEventListener( "resize", this.onresize)
-  //   document.addEventListener( "mousemove", this.onmousemove)
-  // }
-
-//   this.animate = function(){
-//     requestAnimationFrame( self.animate );
-
-
-//     for ( var i = 0; i < nbmesh; i++ ) {
-//       var box = obj['box'+i];
-//       box.rotation.x += ((W * .5) ) * .0000005;
-//       box.rotation.y += ((H * .5) - mouseX) * .0000005;
-//       box.position.z  = ((H * .5) - mouseY) * 1.0;
-//     }
-
-//     pointLight.distance = (mouseY * 2) +1000;
-//     camera.position.y = (mouseY * 0.5);
-//     camera.position.x = (mouseX * 0.5);
-
-//     renderer.render( scene, camera );
-//   }
-
-//   this.onresize = function(){
-//     W = window.innerWidth
-//     H = window.innerHeight
-//     camera.aspect = W / H;
-//     camera.updateProjectionMatrix();
-//     renderer.setSize(W, H, true);
-//     renderer.render(scene, camera);
-//   }
-
-//   this.onmousemove = function(e){
-//     mouseX = e.pageX;
-//     mouseY = e.pageY;
-//   }
-
-//   this.init();
-// 	this.animate();
-// }
-
-// new Background();
