@@ -136,7 +136,7 @@ function init() {
       color = new THREE.Color( 0xffffff );
       color.setRGB( 255, 255, 255 );
 
-      matBox = new THREE.MeshPhongMaterial( { color: color, depthwrite: false, wireframe: false } );
+      matBox = new THREE.MeshPhongMaterial( { color: color, depthwrite: false, wireframe: true } );
 
       box = new THREE.Mesh( geoRec, matBox );
       scene.add(box);
