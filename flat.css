@@ -24,14 +24,14 @@ body {
   background-image: url('./img/blackbrick.jpg');
 }
 #wrap{
-  /* display: flex; */
+  display: flex;
   height: 100vh;
   margin-left: 10vh;
   margin-bottom: 20vh;
   /* position: absolute; */
   top: 0px;
-  /* justify-content: space-between;
-  flex-direction: column; */
+  /* /* justify-content: space-between; */
+  flex-direction: column;
   /* scroll-snap-type: block; */
   /* bottom: 200px; */
   /* backdrop-filter: blur( 10.0px );
@@ -46,12 +46,12 @@ body {
   /* scroll-snap-align: center; */
   flex-direction: column;
   z-index: 1;
-  margin-top: 7em;
-  margin-bottom: 10em;
-  margin-left: 5em;
+  margin-top: 10vh;
+  margin-bottom: 20vh;
+  margin-left: 8vh;
   /* position: auto; */
   /* flex: 1; */
-  /* top: 0px; */
+  /* top: 20%; */
   width: 325px;
   height: 180px;
   /* background: rgb(250, 250, 250, 0.9);
@@ -76,9 +76,9 @@ body {
    z-index: 1;
    /* flex: 2; */
   /* position: inherit; */
-  /* top: 200px; */
-  margin-bottom: 10em;
-  margin-top: 10em;
+  /* top: 20%; */
+  margin-top: 35vh;
+  margin-bottom: 30vh;
   /* background: rgba(231, 99, 11, 0.2); */
   /* -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px); */
@@ -87,8 +87,8 @@ body {
   /* display: flex;
   justify-content:space-evenly; */
   /* position: relative; */
-  margin-bottom: 10em;
-  margin-top: 15em;
+  margin-top: 35vh;
+  margin-bottom: 30vh;
   /* top: 300px; */
   /* background:  rgba(165, 164, 164, 0.2); */
 }
@@ -96,8 +96,8 @@ body {
   /* display: flex;
   justify-content:space-evenly; */
   /* position: relative; */
-  margin-bottom: 10em;
-  margin-top: 5em;
+  margin-top: 35vh;
+  margin-bottom: 30vh;
   /* top: 400px; */
   /* background:  rgba(231, 78, 198, 0.2); */
 }
@@ -105,8 +105,8 @@ body {
   /* display: flex;
    justify-content:space-evenly; */
    /* position: relative; */
-   margin-bottom: 10em;
-   margin-top: 15em;
+   margin-bottom: 35vh;
+   margin-top: 30vh;
    /* top: 500px; */
    /* background:  rgba(61, 214, 241, 0.2); */
   }

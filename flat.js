@@ -66,6 +66,7 @@ let position = 0;
 let rounded = 0;
 let time = 0;
 let block = document.getElementById('block');
+let body = document.querySelector('body');
 let wrap = document.getElementById('wrap');
 let elems = [...document.querySelectorAll('.n')];
 let container = document.getElementById("container");
