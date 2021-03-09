@@ -37,7 +37,7 @@ body {
   /* bottom: 200px; */
   /* backdrop-filter: blur( 10.0px );
   -webkit-backdrop-filter: blur( 10.0px ); */
-  /* transition: all 0.2s; */
+  transition: visible 0.5s smooth;
 }
 .n{
   /* display: flex; */
@@ -186,4 +186,9 @@ h2 {
 a {
   color: #fff;
     text-shadow: 1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000;
+}
+
+.visible {
+  transition-duration: 0.5s;
+  transition: ease-in-out;
 }

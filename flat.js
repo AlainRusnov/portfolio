@@ -274,7 +274,7 @@ function roll(){
     o.dist = Math.min(Math.abs(position - i),1);
     o.dist = 1 - o.dist**2;
     elems[i].style.transform = `scale(${1 + 0.8 * o.dist})`;
-    elems[i].style.transform === "scale(1)" ? elems[i].style.visibility = "hidden" : elems[i].style.visibility = "visible";
+    elems[i].style.transform === "scale(1.8)" ? elems[i].style.visibility = "visible" : elems[i].style.visibility = "hidden";
     // container.style.transform = `background: ${bkground[i]};`
     let scale = 1 + 0.10 * o.dist;
     meshes[i].position.y = i*-1.08 + position*1.1;
