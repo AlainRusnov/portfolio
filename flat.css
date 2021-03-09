@@ -192,3 +192,99 @@ a {
   transition-duration: 0.5s;
   transition: ease-in-out;
 }
+
+.neon {
+  font-family: 'neon_80sregular';
+  font-size: 30px;
+  /* line-height: 1.35; */
+  font-style: italic;
+  color: #fff;
+  animation: headerflicker 10.5s infinite alternate;
+}
+
+.neon::-moz-selection {
+  color: var(--primary-color);
+}
+
+.neon::selection {
+  color: #f890e7;
+}
+
+.neon:focus {
+  outline: none;
+}
+
+@keyframes headerflicker {
+
+  0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+
+      text-shadow:
+          -0.2rem -0.2rem 1rem #fff,
+          0.2rem 0.2rem 1rem #fff,
+          0 0 0.5rem #f890e7,
+          0 0 0.75rem #f890e7,
+          0 0 1rem #f890e7,
+          0 0 1.5rem #f890e7,
+          0 0 2rem #f890e7;
+  }
+
+  20%, 24%, 55% {
+      text-shadow: none;
+      box-shadow: none;
+  }
+}
+
+/* Animate neon flicker */
+@keyframes flicker {
+
+    0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+
+        text-shadow:
+            -0.2rem -0.2rem 1rem #fff,
+            0.2rem 0.2rem 1rem #fff,
+            0 0 0.5rem #f890e7,
+            0 0 1rem #f890e7,
+            0 0 2rem #f890e7,
+            0 0 3rem #f890e7,
+            0 0 4rem #f890e7;
+
+        box-shadow:
+            0 0 .25rem #fff,
+            inset 0 0 .25rem #fff,
+            0 0 0.5rem #0bd3d3,
+            inset 0 0 0.5rem #0bd3d3,
+            0 0 1.0rem #0bd3d3,
+            inset 0 0 0.25rem #0bd3d3;
+    }
+
+    20%, 24%, 55% {
+        text-shadow: none;
+        box-shadow: none;
+    }
+}
+
+.highlight {
+  position: relative;
+  font-family: 'neon_80sregular';
+  /* font-weight: 50; */
+  font-size: 30px;
+  font-style: oblique;
+  /* line-height: 1.65; */
+  transform:skew(25deg);
+  animation: headflicker 10.5s infinite alternate;
+}
+
+.highlight::after {
+  display: block;
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  /* z-index: -1; */
+  opacity: 1;
+  transform: scale(1.10, 1.3) skewX(-15deg);
+  /* background-image: var(--gradient-primary); */
+  animation: flicker 10.5s infinite alternate;
+}
