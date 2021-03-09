@@ -1,7 +1,7 @@
 // import * as THREE from 'https://unpkg.com/three/build/three.module.js';
 
 
-/////////// GLSL Shaders //////////////////////
+/////////// GLSL Shaders Scroller //////////////////////
 
 const vertex = `
 uniform float time;
@@ -60,6 +60,62 @@ void main(){
   });
 
 //////////////////////////////////////////////////////////////////
+///////////// GLSL Shaders Cylinder /////////////////////////////
+
+const cylVert =`
+varying vec2 vUv;
+uniform float uTime;
+
+void main() {
+  vUv = uv;
+
+  vec3 transformed = position;
+  // transformed.z += sin(position.y + uTime);
+
+  gl_Position = projectionMatrix * modelViewMatrix * vec4(transformed, 1.0);
+}
+`;
+
+const cylFrag = `
+varying vec2 vUv;
+uniform float uTime;
+uniform sampler2D uTexture;
+
+void main() {
+  float time = uTime * 0.1;
+
+  vec2 uv = vUv;
+  vec2 repeat = vec2(12.0,4.0);
+  uv.x += sin(uv.y) * -0.25;
+  uv = fract(uv * repeat + vec2(0.0, time));
+  vec4 color = texture(uTexture, uv);
+
+  gl_FragColor = color;
+}
+`;
+
+ // Text //
+ const typo = new THREE.TextureLoader().load('./img/projtypofill.png', (texture) =>
+ {
+   texture.minFilter = THREE.NearestFilter;
+ });
+
+// Cylinder Shader mat
+
+let matCyl = new THREE.ShaderMaterial({
+  vertexShader: cylVert,
+  fragmentShader: cylFrag,
+  uniforms: {
+    uTime: { value: 0 },
+    uTexture: { value: typo }
+  },
+  transparent: false,
+  side: THREE.DoubleSide,
+});
+
+/////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////
+
 
 let speed = 0;
 let position = 0;
@@ -79,14 +135,11 @@ let camera, scene, renderer;
 let geoback, mat, mesh;
 let bkground = [0xff, 0xffff, 0x000, 0xffffff, 0x000ff];
 
-var W, H;
-  // var camera, scene, renderer;
-  var geoRec, matBox
-  var pointLight;
-  var obj = {};
-  var mouseX = 0;
-  var mouseY = 0;
-  var nbmesh = 100;
+
+let pointLight;
+let obj = {};
+let mouseX = 0;
+let mouseY = 0;
 
 init();
 
@@ -114,40 +167,48 @@ function init() {
   container.appendChild( renderer.domElement );
 
    // LIGHTS
-   pointLight = new THREE.PointLight(0xFFFFFF, 1.0, 1500);
-   pointLight.position.x = 1;
-   pointLight.position.y = 0;
-   pointLight.position.z = 3;
-   scene.add(pointLight);
+  //  pointLight = new THREE.PointLight(0xFFFFFF, 1.0, 20000);
+  //  pointLight.position.x = 3;
+  //  pointLight.position.y = 0;
+  //  pointLight.position.z = 3;
+  //  scene.add(pointLight);
 
   //  shadow = new THREE.LightShadow( camera );
   //  scene.add(shadow);
 
-  // Text //
+  // Clock ///
+
+  clock = new THREE.Clock();
+
+  // // Text //
+  // typo = new THREE.TextureLoader().load('./img/projectstypo.png', (typo) =>
+  // {
+  //   typo.minFilter = THREE.NearestFilter;
+  // });
 
 
 
    // Cylinder
 
-   geoRec = new THREE.CylinderBufferGeometry( 0.70, 0.70, 6, 64 );
+   geoCyl = new THREE.CylinderBufferGeometry( 0.70, 0.70, 6, 64 );
 
 
-  let box;
-      color = new THREE.Color( 0xffffff );
-      color.setRGB( 255, 255, 255 );
+  let cyl;
+      // color = new THREE.Color( 0xffffff );
+      // color.setRGB( 255, 255, 255 );
 
-      matBox = new THREE.MeshPhongMaterial( { color: color, depthwrite: false, wireframe: true } );
+      // matCyl = new THREE.MeshPhongMaterial( { color: color, depthwrite: false, wireframe: true } );
 
-      box = new THREE.Mesh( geoRec, matBox );
-      scene.add(box);
+      cyl = new THREE.Mesh( geoCyl, matCyl );
+      scene.add(cyl);
 
-      box.position.x = 1;
-      box.position.y = 1;
-      box.position.z = -1;
+      cyl.position.x = 1;
+      cyl.position.y = 1;
+      cyl.position.z = -1;
 
-      box.rotation.y = -0.3;
-      box.rotation.x = -0.2;
-      box.rotation.z = -0.2;
+      cyl.rotation.y = -0.3;
+      cyl.rotation.x = -0.2;
+      cyl.rotation.z = -0.2;
   //   }
 
   animate();
@@ -255,9 +316,10 @@ function animate() {
 	// mesh.rotation.x = time / 2000;
 	// mesh.rotation.y = time / 1000;
 
+  // Uniform update on cylinder
+  matCyl.uniforms.uTime.value = clock.getElapsedTime();
 
-
-  pointLight.distance = (mouseY * 2) +2000;
+  // pointLight.distance = (mouseY * 2) +2000;
   // camera.position.y = (mouseY * 0.5);
   // camera.position.x = (mouseX * 0.5);
 
