@@ -15,7 +15,7 @@ void main() {
   vUv= (uv - vec2(0.5))*(1.08 - 0.1*distanceFromCenter*(2. - distanceFromCenter)) + vec2(0.5);
   vec3 pos = position;
   pos.y += sin(PI*uv.x)*0.01;
-  pos.z += sin(PI*uv.x)*0.02;
+  pos.z += sin(PI*uv.x)*0.03;
 
   pos.y += sin(time*0.25)*0.01;
   vUv.y -= sin(time*0.25)*0.01;
@@ -190,7 +190,7 @@ function init() {
 
    // Cylinder
 
-   geoCyl = new THREE.CylinderBufferGeometry( 0.70, 0.70, 6, 64 );
+   geoCyl = new THREE.CylinderBufferGeometry( 0.60, 0.60, 6, 64 );
 
 
   let cyl;
@@ -277,7 +277,7 @@ function roll(){
     elems[i].style.transform === "scale(1)" ? elems[i].style.visibility = "hidden" : elems[i].style.visibility = "visible";
     // container.style.transform = `background: ${bkground[i]};`
     let scale = 1 + 0.10 * o.dist;
-    meshes[i].position.y = i*-1.1 + position*1.1;
+    meshes[i].position.y = i*-1.08 + position*1.1;
     meshes[i].scale.set(scale,scale,scale);
     meshes[i].material.uniforms.distanceFromCenter.value =  o.dist;
   });
