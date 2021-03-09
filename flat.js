@@ -191,17 +191,23 @@ function init() {
    // Cylinder
 
    geoCyl = new THREE.CylinderBufferGeometry( 0.60, 0.60, 6, 64 );
+   geoCyl2 = new THREE.CylinderBufferGeometry( 0.60, 0.60, 6, 10 );
 
 
   let cyl;
-      // color = new THREE.Color( 0xffffff );
-      // color.setRGB( 255, 255, 255 );
+  let cyl2;
 
-      // matCyl = new THREE.MeshPhongMaterial( { color: color, depthwrite: false, wireframe: true } );
+  color = new THREE.Color( 0xffffff );
+  color.setRGB( 255, 255, 255 );
+
+  matCyl2 = new THREE.MeshBasicMaterial( { color: 0xffffff, wireframe: true } ); // depthwrite: false
 
       cyl = new THREE.Mesh( geoCyl, matCyl );
       scene.add(cyl);
+      cyl2 = new THREE.Mesh( geoCyl2, matCyl2 );
+      scene.add(cyl2);
 
+      // Cyl 1 text
       cyl.position.x = 1;
       cyl.position.y = 1;
       cyl.position.z = -1;
@@ -209,7 +215,15 @@ function init() {
       cyl.rotation.y = -0.3;
       cyl.rotation.x = -0.2;
       cyl.rotation.z = -0.2;
-  //   }
+
+      // Cyl 2 mesh
+      cyl2.position.x = 0;
+      cyl2.position.y = -1.5;
+      cyl2.position.z = -1;
+
+      cyl2.rotation.y = 0.3;
+      cyl2.rotation.x = 0.2;
+      cyl2.rotation.z = 1.2;
 
   animate();
   handleImages();
